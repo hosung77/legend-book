@@ -2,8 +2,7 @@ package com.example.praticetokensecurity.config;
 
 import com.example.praticetokensecurity.common.exception.CustomException;
 import com.example.praticetokensecurity.common.exception.ErrorCode;
-import com.example.praticetokensecurity.user.entity.User;
-import com.example.praticetokensecurity.user.enums.UserRole;
+import com.example.praticetokensecurity.domain.user.entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -13,9 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import java.rmi.ServerException;
 import java.security.Key;
-import java.security.Signature;
 import java.util.Base64;
 import java.util.Date;
 

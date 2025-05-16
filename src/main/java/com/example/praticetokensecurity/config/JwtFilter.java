@@ -1,6 +1,6 @@
 package com.example.praticetokensecurity.config;
 
-import com.example.praticetokensecurity.user.service.CustomUserDetailsService;
+import com.example.praticetokensecurity.domain.user.service.CustomUserDetailsService;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
