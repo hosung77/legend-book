@@ -1,5 +1,5 @@
 ---
-name: Spring-Rider-refactoring
+name: Legend-Book-refactoring
 about: 레전드 수정사항 발생
 title: "[Refactoring]"
 labels: refactoring

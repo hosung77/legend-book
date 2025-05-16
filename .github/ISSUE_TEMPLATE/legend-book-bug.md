@@ -1,5 +1,5 @@
 ---
-name: Spring-Rider-bug
+name: Legend-Book-bug
 about: 레전드 버그 발생
 title: "[Bug]"
 labels: bug

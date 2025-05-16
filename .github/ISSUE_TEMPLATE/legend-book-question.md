@@ -1,5 +1,5 @@
 ---
-name: Spring-Rider-question
+name: Legend-Book-question
 about: 레전드 질문 발생
 title: "[Question]"
 labels: question
