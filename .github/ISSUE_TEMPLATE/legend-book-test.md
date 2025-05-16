@@ -1,5 +1,5 @@
 ---
-name: Spring-Rider-Test
+name: Legend-Book-Test
 about: 레전드 테스트할 것 발생
 title: "[Test]"
 labels: test

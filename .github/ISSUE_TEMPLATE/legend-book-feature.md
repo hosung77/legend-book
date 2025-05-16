@@ -1,5 +1,5 @@
 ---
-name: Spring-Rider-feature
+name: Legend-Book-feature
 about: 4인의 용사들의 feature 이슈
 title: "[Feature]"
 labels: feature

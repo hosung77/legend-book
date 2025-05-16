@@ -1,5 +1,5 @@
 ---
-name: Spring-Rider-fix
+name: Legend-Book-fix
 about: 레전드까진 아니고 간단한 수정사항 발생
 title: "[Fix]"
 labels: fix
