@@ -22,4 +22,8 @@ public class Like {
     @ManyToOne
     @JoinColumn(name = "book_id")
     private Book book;
+
+    @Column(nullable = false)
+    private boolean liked = true; // true = 좋아요, false = 취소
+
 }
