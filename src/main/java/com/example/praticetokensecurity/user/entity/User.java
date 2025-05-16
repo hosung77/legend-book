@@ -17,7 +17,7 @@ import java.util.List;
 @Getter
 public class User extends TimeStamped {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "user_id")
     private Long id;
 
     @Column(unique = true)
