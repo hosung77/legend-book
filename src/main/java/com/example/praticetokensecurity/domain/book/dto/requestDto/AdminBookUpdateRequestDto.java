@@ -1,4 +1,4 @@
-package com.example.praticetokensecurity.domain.book.dto;
+package com.example.praticetokensecurity.domain.book.dto.requestDto;
 
 import com.example.praticetokensecurity.domain.book.enums.BookStatus;
 import jakarta.validation.constraints.NotBlank;
