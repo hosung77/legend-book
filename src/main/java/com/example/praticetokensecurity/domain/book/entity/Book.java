@@ -1,7 +1,8 @@
 package com.example.praticetokensecurity.domain.book.entity;
 
 import com.example.praticetokensecurity.common.entity.TimeStamped;
-import com.example.praticetokensecurity.domain.book.dto.AdminBookRequestDto;
+import com.example.praticetokensecurity.domain.book.dto.requestDto.AdminBookRequestDto;
+import com.example.praticetokensecurity.domain.book.dto.requestDto.AdminBookUpdateRequestDto;
 import com.example.praticetokensecurity.domain.book.enums.BookStatus;
 import com.example.praticetokensecurity.domain.book.enums.Category;
 import com.example.praticetokensecurity.domain.like.entity.Like;
@@ -58,6 +59,22 @@ public class Book extends TimeStamped {
             dto.getPublisher(),
             BookStatus.AVAILABLE
         );
+    }
+
+    public static void updateInfo(Book book, AdminBookUpdateRequestDto dto) {
+        book.update(
+            dto.getTitle(),
+            dto.getAuthorName(),
+            dto.getPublisher(),
+            dto.getBookStatus()
+        );
+    }
+
+    public void update(String title, String authorName, String publisher, BookStatus bookStatus) {
+        this.title = title;
+        this.authorName = authorName;
+        this.publisher = publisher;
+        this.bookStatus = bookStatus;
     }
 
 }

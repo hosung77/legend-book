@@ -1,4 +1,4 @@
-package com.example.praticetokensecurity.domain.book.dto;
+package com.example.praticetokensecurity.domain.book.dto.responseDto;
 
 import com.example.praticetokensecurity.domain.book.entity.Book;
 import com.example.praticetokensecurity.domain.book.enums.BookStatus;
