@@ -12,11 +12,13 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Table(name = "like_book")
 @NoArgsConstructor
 @Getter
+@ToString
 public class Like {
 
     @Id
@@ -32,6 +34,20 @@ public class Like {
     private Book book;
 
     @Column(nullable = false)
-    private boolean liked = true; // true = 좋아요, false = 취소
+    private boolean liked = false; // true = 좋아요, false = 취소
+
+    public Like(User user, Book book, Boolean liked) {
+        this.user = user;
+        this.book = book;
+        this.liked = liked;
+    }
+
+    public static Like of(User user, Book book, Boolean liked) {
+        return new Like(user, book, liked);
+    }
+
+    public void toggle(){
+        this.liked = !this.liked;
+    }
 
 }
