@@ -1,5 +1,7 @@
 package com.example.praticetokensecurity.domain.auth.controller;
 
+import com.example.praticetokensecurity.common.code.SuccessStatus;
+import com.example.praticetokensecurity.common.response.ApiResponse;
 import com.example.praticetokensecurity.domain.auth.dto.request.LoginRequestDto;
 import com.example.praticetokensecurity.domain.auth.dto.request.SignUpRequestDto;
 import com.example.praticetokensecurity.domain.auth.dto.response.LoginResponseDto;
@@ -21,20 +23,21 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/signup")
-    ResponseEntity<SignUpResponseDto> signUp(@Valid @RequestBody SignUpRequestDto signUpRequestDto){
+    ResponseEntity<ApiResponse<SignUpResponseDto>> signUp(
+        @Valid @RequestBody SignUpRequestDto signUpRequestDto) {
         SignUpResponseDto response = authService.signUp(signUpRequestDto.getEmail()
-                ,signUpRequestDto.getPassword()
-                ,signUpRequestDto.getUserRole()
-                ,signUpRequestDto.getUserName()
-                ,signUpRequestDto.getPhoneNum()
-                        );
-        return ResponseEntity.ok(response);
+            , signUpRequestDto.getPassword()
+            , signUpRequestDto.getUserRole()
+            , signUpRequestDto.getUserName()
+            , signUpRequestDto.getPhoneNum()
+        );
+        return ApiResponse.onSuccess(SuccessStatus.SIGNUP_SUCCESS);
     }
 
     @PostMapping("/login")
-    ResponseEntity<LoginResponseDto> singIn(@Valid @RequestBody LoginRequestDto requestDto){
+    ResponseEntity<LoginResponseDto> singIn(@Valid @RequestBody LoginRequestDto requestDto) {
         LoginResponseDto response = authService.signIn(requestDto.getEmail()
-                , requestDto.getPassword());
+            , requestDto.getPassword());
         return ResponseEntity.ok(response);
     }
 

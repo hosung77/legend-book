@@ -1,7 +1,7 @@
 package com.example.praticetokensecurity.domain.user.service;
 
-import com.example.praticetokensecurity.common.exception.CustomException;
-import com.example.praticetokensecurity.common.exception.ErrorCode;
+import com.example.praticetokensecurity.common.code.ErrorStatus;
+import com.example.praticetokensecurity.common.error.ApiException;
 import com.example.praticetokensecurity.domain.user.entity.CustomUserPrincipal;
 import com.example.praticetokensecurity.domain.user.entity.User;
 import com.example.praticetokensecurity.domain.user.repository.UserRepository;
@@ -20,7 +20,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(username)
-                .orElseThrow(()-> new CustomException(ErrorCode.EMAIL_NOT_FOUND));
+            .orElseThrow(() -> new ApiException(ErrorStatus.EMAIL_NOT_FOUND));
 
         return new CustomUserPrincipal(user);
 
