@@ -56,4 +56,9 @@ public class User extends TimeStamped {
         String phoneNum) {
         return new User(email, password, userRole, userName, phoneNum);
     }
+
+    public void updateLike(Like like){
+        this.likes.add(like);
+    }
+
 }

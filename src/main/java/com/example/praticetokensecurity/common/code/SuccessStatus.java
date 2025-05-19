@@ -13,7 +13,10 @@ public enum SuccessStatus implements BaseCode {
     SIGNUP_SUCCESS(HttpStatus.CREATED, "1001", "회원가입이 완료되었습니다."),
     LOGIN_SUCCESS(HttpStatus.OK, "1002", "로그인에 성공하였습니다."),
     REISSUE_SUCCESS(HttpStatus.OK, "1003", "토큰이 재발급되었습니다."),
-    LOGOUT_SUCCESS(HttpStatus.OK, "1004", "로그아웃이 완료되었습니다.");;
+    LOGOUT_SUCCESS(HttpStatus.OK, "1004", "로그아웃이 완료되었습니다."),
+
+    // 3000 like
+    LIKE_SUCCESS(HttpStatus.OK,"3001","좋아요 상태가 변경되었습니다.");
 
     private final HttpStatus httpStatus;
     private final String code;

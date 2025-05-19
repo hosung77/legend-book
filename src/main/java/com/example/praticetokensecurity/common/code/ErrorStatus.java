@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 @RequiredArgsConstructor
 public enum ErrorStatus implements BaseErrorCode {
 
-
     // 사용자
     USER_NOT_FOUND(HttpStatus.NOT_FOUND, "Not Found", "유저를 찾을 수 없습니다."),
     EMAIL_NOT_FOUND(HttpStatus.NOT_FOUND, "Not Found", "유저를 찾을 수 없습니다."),
