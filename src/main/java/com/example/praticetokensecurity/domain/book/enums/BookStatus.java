@@ -13,6 +13,6 @@ public enum BookStatus {
         return Arrays.stream(BookStatus.values())
             .filter(s -> s.name().equalsIgnoreCase(status))
             .findFirst()
-            .orElseThrow(() -> new ApiException(ErrorStatus.BOOK_INVALID_STATUS));
+            .orElseThrow(() -> new ApiException(ErrorStatus.BOOK_NOT_FOUND));
     }
 }
