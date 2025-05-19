@@ -1,5 +1,6 @@
-package com.example.praticetokensecurity.domain.book.dto;
+package com.example.praticetokensecurity.domain.book.dto.requestDto;
 
+import com.example.praticetokensecurity.domain.book.enums.BookStatus;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor(force = true)
-public class AdminBookRequestDto {
+public class AdminBookUpdateRequestDto {
 
     @NotBlank(message = "제목은 필수입니다.")
     private String title;
@@ -18,4 +19,5 @@ public class AdminBookRequestDto {
 
     private String publisher;
 
+    private BookStatus bookStatus;
 }
