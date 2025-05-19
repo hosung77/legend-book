@@ -15,6 +15,10 @@ public enum SuccessStatus implements BaseCode {
     REISSUE_SUCCESS(HttpStatus.OK, "1003", "토큰이 재발급되었습니다."),
     LOGOUT_SUCCESS(HttpStatus.OK, "1004", "로그아웃이 완료되었습니다."),
 
+
+    //4000: Book 성공 코드
+    BOOK_READ_SUCCESS(HttpStatus.OK, "4001", "도서 조회 성공"),
+
     // 2000: 책 성공 코드
     BOOK_CREATE_SUCCESS(HttpStatus.CREATED, "2001", "책 등록이 완료되었습니다."),
     BOOK_UPDATE_SUCCESS(HttpStatus.OK, "2002", "책 정보 수정이 완료되었습니다."),
