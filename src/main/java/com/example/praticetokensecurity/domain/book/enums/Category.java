@@ -1,5 +1,9 @@
 package com.example.praticetokensecurity.domain.book.enums;
 
+import com.example.praticetokensecurity.common.code.ErrorStatus;
+import com.example.praticetokensecurity.common.error.ApiException;
+import java.util.Arrays;
+
 public enum Category {
     NOVEL,          // 소설
     ESSAY,          // 에세이
@@ -15,5 +19,12 @@ public enum Category {
     EDUCATION,      // 교육
     RELIGION,       // 종교
     HEALTH,         // 건강
-    COOKING         // 요리
+    COOKING;         // 요리
+
+    public static Category of(String category) {
+        return Arrays.stream(Category.values())
+            .filter(c -> c.name().equalsIgnoreCase(category))
+            .findFirst()
+            .orElseThrow(() -> new ApiException(ErrorStatus.CATEGORY_INVALID));
+    }
 }

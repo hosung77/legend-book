@@ -3,6 +3,7 @@ package com.example.praticetokensecurity.domain.book.entity;
 import com.example.praticetokensecurity.common.entity.TimeStamped;
 import com.example.praticetokensecurity.domain.book.dto.AdminBookRequestDto;
 import com.example.praticetokensecurity.domain.book.enums.BookStatus;
+import com.example.praticetokensecurity.domain.book.enums.Category;
 import com.example.praticetokensecurity.domain.like.entity.Like;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -36,6 +37,9 @@ public class Book extends TimeStamped {
 
     @Enumerated(EnumType.STRING)
     private BookStatus bookStatus = BookStatus.AVAILABLE;
+
+    @Enumerated(EnumType.STRING)
+    private Category category;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Like> likes = new ArrayList<>();
