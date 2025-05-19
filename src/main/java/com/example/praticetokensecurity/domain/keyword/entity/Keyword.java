@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "keyword")
-@NoArgsConstructor
 @Getter
 public class Keyword {
 
@@ -19,4 +18,16 @@ public class Keyword {
     private Long id;
 
     private String keyword;
+
+    public Keyword(String keyword) {
+        this.keyword = keyword;
+    }
+
+    public Keyword() {
+    }
+
+    public static Keyword of(String keyword) {
+        return new Keyword(keyword);
+    }
+
 }

@@ -7,6 +7,7 @@ import com.example.praticetokensecurity.domain.book.repository.BookRepository;
 import com.example.praticetokensecurity.domain.like.repository.LikeRepository;
 import com.example.praticetokensecurity.domain.user.entity.User;
 import com.example.praticetokensecurity.domain.user.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import com.example.praticetokensecurity.domain.like.entity.Like;
@@ -22,6 +23,7 @@ public class LikeService {
     private final UserRepository userRepository;
     private final BookRepository bookRepository;
 
+    @Transactional
     public void toggleLike(Long userId, Long bookId) {
         User user = userRepository.findById(userId).orElseThrow(
             () -> new ApiException(ErrorStatus.USER_NOT_FOUND)
