@@ -26,7 +26,6 @@ public class BookService {
             book.getTitle(),
             book.getAuthorName(),
             book.getPublisher(),
-            book.getCategory().name(),
             book.getBookStatus().name()
         );
     }
