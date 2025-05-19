@@ -30,7 +30,7 @@ public class AuthService {
         String phoneNum) {
 
         if (userRepository.existsByEmail(email)) {
-            throw new ApiException(ErrorStatus.AlREADY_EXIST_UESR); // 임시 에러처리
+            throw new ApiException(ErrorStatus.AlREADY_EXIST_USER); // 임시 에러처리
         }
 
         UserRole userRole = UserRole.of(Role);
@@ -54,9 +54,10 @@ public class AuthService {
 
         String accessToken = jwtTokenProvider.createAccessToken(user);
         String refreshToken = jwtTokenProvider.createRefreshToken(user);
+        String token = jwtTokenProvider.subStringToken(accessToken);
 
         RefreshToken savedRefreshToken = refreshTokenService.saveToken(refreshToken, user.getId());
 
-        return new LoginResponseDto(savedRefreshToken.getToken());
+        return new LoginResponseDto(token);
     }
 }

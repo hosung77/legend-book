@@ -10,15 +10,14 @@ import org.springframework.http.HttpStatus;
 public enum ErrorStatus implements BaseErrorCode {
 
 
-    // 사용자
-    USER_NOT_FOUND(HttpStatus.NOT_FOUND, "Not Found", "유저를 찾을 수 없습니다."),
-    EMAIL_NOT_FOUND(HttpStatus.NOT_FOUND, "Not Found", "유저를 찾을 수 없습니다."),
-    PASSWORD_NOT_MATCH(HttpStatus.BAD_REQUEST, "Not Match", "비밀번호가 일치하지 않습니다."),
-    AlREADY_EXIST_UESR(HttpStatus.BAD_REQUEST, "Already exist", "이미 존재하는 유저입니다."),
-
+    // 1000: auth
+    USER_NOT_FOUND(HttpStatus.NOT_FOUND, "101", "유저를 찾을 수 없습니다."),
+    EMAIL_NOT_FOUND(HttpStatus.NOT_FOUND, "102", "유저를 찾을 수 없습니다."),
+    PASSWORD_NOT_MATCH(HttpStatus.BAD_REQUEST, "103", "비밀번호가 일치하지 않습니다."),
+    AlREADY_EXIST_USER(HttpStatus.BAD_REQUEST, "104", "이미 존재하는 유저입니다."),
     // 토큰
-    TOKEN_NOT_FOUND(HttpStatus.NOT_FOUND, "Not Found", "토큰을 찾을 수 없습니다.");
-
+    TOKEN_NOT_FOUND(HttpStatus.NOT_FOUND, "105", "토큰을 찾을 수 없습니다."),
+    INVALID_TOKEN(HttpStatus.UNAUTHORIZED, "401", "유효하지 않은 토큰입니다.");
 
     private final HttpStatus httpStatus;
     private final String code;
