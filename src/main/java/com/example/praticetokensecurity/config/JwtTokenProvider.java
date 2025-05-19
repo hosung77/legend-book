@@ -12,7 +12,6 @@ import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import jakarta.annotation.PostConstruct;
-import jakarta.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Base64;
@@ -73,15 +72,6 @@ public class JwtTokenProvider {
             return tokenValue.substring(7);
         }
         throw new ApiException(ErrorStatus.TOKEN_NOT_FOUND);
-    }
-
-    public String resolveToken(HttpServletRequest request) {
-        String bearer = request.getHeader("Authorization");
-
-        if (bearer != null && bearer.startsWith("Bearer")) {
-            return bearer.substring(7).trim();
-        }
-        return null;
     }
 
     public Claims extractClaims(String token) {
