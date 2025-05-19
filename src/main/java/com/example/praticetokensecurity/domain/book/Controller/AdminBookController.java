@@ -9,7 +9,6 @@ import com.example.praticetokensecurity.domain.book.dto.responseDto.AdminPageRes
 import com.example.praticetokensecurity.domain.book.service.AdminBookService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,11 +27,11 @@ public class AdminBookController {
     private final AdminBookService adminBookService;
 
     @PostMapping("/admin/books")
-    public ResponseEntity<AdminBookResponseDto> createBook(
-        @Valid @RequestBody AdminBookRequestDto requestDto) {
-
+    public ResponseEntity<ApiResponse<AdminBookResponseDto>> createBook(
+        @Valid @RequestBody AdminBookRequestDto requestDto
+    ) {
         AdminBookResponseDto responseDto = adminBookService.createBook(requestDto);
-        return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
+        return ApiResponse.onSuccess(SuccessStatus.BOOK_CREATE_SUCCESS, responseDto);
     }
 
     @PutMapping("/admin/books/{id}")
