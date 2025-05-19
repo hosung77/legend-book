@@ -6,9 +6,10 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class LoginResponseDto {
-    String refreshToken;
 
-    public LoginResponseDto(String refreshToken){
-        this.refreshToken = refreshToken;
+    String accessToken;
+
+    public LoginResponseDto(String accessToken) {
+        this.accessToken = accessToken;
     }
 }

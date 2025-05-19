@@ -4,17 +4,25 @@ import com.example.praticetokensecurity.common.code.ErrorStatus;
 import com.example.praticetokensecurity.common.error.ApiException;
 import com.example.praticetokensecurity.domain.user.entity.User;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SignatureException;
 import jakarta.annotation.PostConstruct;
+import jakarta.servlet.http.HttpServletRequest;
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+@Slf4j
 @Component
 public class JwtTokenProvider {
 
@@ -67,12 +75,40 @@ public class JwtTokenProvider {
         throw new ApiException(ErrorStatus.TOKEN_NOT_FOUND);
     }
 
+    public String resolveToken(HttpServletRequest request) {
+        String bearer = request.getHeader("Authorization");
+
+        if (bearer != null && bearer.startsWith("Bearer")) {
+            return bearer.substring(7).trim();
+        }
+        return null;
+    }
+
     public Claims extractClaims(String token) {
         return Jwts.parserBuilder()
             .setSigningKey(key)
             .build()
             .parseClaimsJws(token)//  token이 이 key로 서명되었는지 확인함
             .getBody(); // 서명이 유효하면 claims(body)를 꺼냄
+    }
+
+    public boolean validateToken(String token) {
+        try {
+            Jwts.parserBuilder()
+                .setSigningKey(Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8)))
+                .build()
+                .parseClaimsJws(token);
+            return true;
+        } catch (SecurityException | MalformedJwtException | SignatureException ex) {
+            log.warn("잘못된 JWT 서명입니다: {}", ex.getMessage());
+        } catch (ExpiredJwtException ex) {
+            log.warn("만료된 JWT 토큰입니다: {}", ex.getMessage());
+        } catch (UnsupportedJwtException ex) {
+            log.warn("지원되지 않는 JWT 토큰입니다: {}", ex.getMessage());
+        } catch (IllegalArgumentException ex) {
+            log.warn("JWT 토큰이 비었습니다: {}", ex.getMessage());
+        }
+        return false;
     }
 
 }
