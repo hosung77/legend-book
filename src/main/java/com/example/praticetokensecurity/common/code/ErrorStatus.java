@@ -18,6 +18,7 @@ public enum ErrorStatus implements BaseErrorCode {
 
     // 4000: Book
     BOOK_NOT_FOUND(HttpStatus.NOT_FOUND, "4011", "해당 도서를 찾을 수 없습니다."),
+    INVALID_BOOK_STATUS(HttpStatus.BAD_REQUEST, "4012", "도서 상태 값이 유효하지 않습니다."),
 
     // 5000: token
     TOKEN_NOT_FOUND(HttpStatus.NOT_FOUND, "5011", "토큰을 찾을 수 없습니다."),
