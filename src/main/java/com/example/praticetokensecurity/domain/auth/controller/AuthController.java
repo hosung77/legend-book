@@ -1,8 +1,6 @@
 package com.example.praticetokensecurity.domain.auth.controller;
 
-import com.example.praticetokensecurity.common.code.ErrorStatus;
 import com.example.praticetokensecurity.common.code.SuccessStatus;
-import com.example.praticetokensecurity.common.error.ApiException;
 import com.example.praticetokensecurity.common.response.ApiResponse;
 import com.example.praticetokensecurity.config.JwtTokenProvider;
 import com.example.praticetokensecurity.domain.auth.dto.request.LoginRequestDto;
@@ -12,12 +10,10 @@ import com.example.praticetokensecurity.domain.auth.dto.response.SignUpResponseD
 import com.example.praticetokensecurity.domain.auth.service.AuthService;
 import com.example.praticetokensecurity.domain.token.service.RefreshTokenService;
 import com.example.praticetokensecurity.domain.user.entity.CustomUserPrincipal;
-import io.jsonwebtoken.Claims;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,21 +48,12 @@ public class AuthController {
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<ApiResponse<Void>> logout(HttpServletRequest request) {
-        String token = jwtTokenProvider.resolveToken(request);
+    public ResponseEntity<ApiResponse<Void>> logout(
+        @AuthenticationPrincipal CustomUserPrincipal authUser) {
 
-        if (token == null) {
-            throw new ApiException(ErrorStatus.TOKEN_NOT_FOUND);
-        }
+        Long userId = authUser.getId();
 
-        Claims claims = jwtTokenProvider.extractClaims(token);
-        Long userId = claims.get("userId", Long.class);
-
-        CustomUserPrincipal authUser = (CustomUserPrincipal) SecurityContextHolder.getContext()
-            .getAuthentication().getPrincipal();
-        if (!userId.equals(authUser.getId())) {
-            throw new ApiException(ErrorStatus.INVALID_TOKEN);
-        }
+        refreshTokenService.deleteRefreshToken(userId);
 
         return ApiResponse.onSuccess(SuccessStatus.LOGOUT_SUCCESS);
     }

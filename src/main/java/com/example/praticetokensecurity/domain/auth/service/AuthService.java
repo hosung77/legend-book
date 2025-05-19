@@ -54,10 +54,9 @@ public class AuthService {
 
         String accessToken = jwtTokenProvider.createAccessToken(user);
         String refreshToken = jwtTokenProvider.createRefreshToken(user);
-        String token = jwtTokenProvider.subStringToken(accessToken);
 
         RefreshToken savedRefreshToken = refreshTokenService.saveToken(refreshToken, user.getId());
 
-        return new LoginResponseDto(token);
+        return new LoginResponseDto(accessToken);
     }
 }
