@@ -1,8 +1,8 @@
 package com.example.praticetokensecurity.domain.book.entity;
 
 import com.example.praticetokensecurity.common.entity.TimeStamped;
-import com.example.praticetokensecurity.domain.book.dto.AdminBookRequestDto;
-import com.example.praticetokensecurity.domain.book.dto.AdminBookUpdateRequestDto;
+import com.example.praticetokensecurity.domain.book.dto.requestDto.AdminBookRequestDto;
+import com.example.praticetokensecurity.domain.book.dto.requestDto.AdminBookUpdateRequestDto;
 import com.example.praticetokensecurity.domain.book.enums.BookStatus;
 import com.example.praticetokensecurity.domain.like.entity.Like;
 import jakarta.persistence.CascadeType;

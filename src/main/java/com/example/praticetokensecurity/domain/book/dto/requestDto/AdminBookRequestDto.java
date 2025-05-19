@@ -1,4 +1,4 @@
-package com.example.praticetokensecurity.domain.book.dto;
+package com.example.praticetokensecurity.domain.book.dto.requestDto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
