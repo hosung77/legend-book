@@ -8,7 +8,6 @@ import com.example.praticetokensecurity.domain.book.dto.responseDto.AdminBookRes
 import com.example.praticetokensecurity.domain.book.dto.responseDto.AdminPageResponse;
 import com.example.praticetokensecurity.domain.book.entity.Book;
 import com.example.praticetokensecurity.domain.book.repository.BookRepository;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -39,16 +38,20 @@ public class AdminBookService {
 
     @Transactional(readOnly = true)
     public AdminPageResponse<AdminBookResponseDto> getAllBooks(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by("createdAt").descending());
+        Pageable pageable = PageRequest.of(page - 1, size, Sort.by("createdAt").descending());
 
-        Page<Book> bookPage = bookRepository.findAll(pageable);
+        Page<Book> bookPage = bookRepository.findAllByIsDeletedFalse(pageable);
 
-        List<AdminBookResponseDto> content = bookPage.stream().map(AdminBookResponseDto::new)
-            .toList();
-
-        return new AdminPageResponse<>(content, bookPage.getNumber(), bookPage.getTotalPages(),
-            bookPage.getTotalElements());
+        return new AdminPageResponse<>(bookPage, AdminBookResponseDto::new);
     }
+
+    @Transactional
+    public void deleteBook(Long id) {
+        Book book = bookRepository.findByIdAndIsDeletedFalse(id)
+            .orElseThrow(() -> new ApiException(ErrorStatus.BOOK_NOT_FOUND));
+        book.delete();
+    }
+
 
 
 }

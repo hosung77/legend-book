@@ -27,10 +27,10 @@ public class LikeService {
     public void toggleLike(Long userId, Long bookId) {
         User user = userRepository.findById(userId).orElseThrow(
             () -> new ApiException(ErrorStatus.USER_NOT_FOUND)
-        ); // 임시 예외
+        );
 
         Book book = bookRepository.findById(bookId).orElseThrow(
-            () -> new ApiException(ErrorStatus.USER_NOT_FOUND)
+            () -> new ApiException(ErrorStatus.BOOK_NOT_FOUND)
         );
 
         Optional<Like> existing = likeRepository.findByUserAndBook(user, book);

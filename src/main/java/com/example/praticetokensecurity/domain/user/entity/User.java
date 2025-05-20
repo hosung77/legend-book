@@ -1,6 +1,7 @@
 package com.example.praticetokensecurity.domain.user.entity;
 
 import com.example.praticetokensecurity.common.entity.TimeStamped;
+import com.example.praticetokensecurity.domain.book.entity.Book;
 import com.example.praticetokensecurity.domain.like.entity.Like;
 import com.example.praticetokensecurity.domain.user.dto.request.UserUpdateRequestDto;
 import com.example.praticetokensecurity.domain.user.enums.UserRole;
@@ -44,6 +45,9 @@ public class User extends TimeStamped {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Like> likes = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user")
+    private List<Book> books = new ArrayList<>();
+
     public User(String email, String password, UserRole userRole, String userName,
         String phoneNum) {
         this.email = email;
@@ -70,7 +74,6 @@ public class User extends TimeStamped {
             this.phoneNum = dto.getPhoneNum();
         }
     }
-
 
     public void updateLike(Like like) {
         this.likes.add(like);
