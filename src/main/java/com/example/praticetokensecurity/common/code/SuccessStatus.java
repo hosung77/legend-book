@@ -17,13 +17,16 @@ public enum SuccessStatus implements BaseCode {
 
     //2000: User 성공 코드
     USER_GET_SUCCESS(HttpStatus.OK, "2001", "유저 조회 성공"),
-    USER_DELETE_SUCCESS(HttpStatus.OK, "2005", "유저 삭제 성공"),
+    USER_DELETE_SUCCESS(HttpStatus.OK, "2002", "유저 삭제 성공"),
+    USER_BOOK_LIST_SUCCESS(HttpStatus.OK, "2003", "대여한 도서 목록 조회 성공"),
 
     // 3000: like 성공 코드
     LIKE_SUCCESS(HttpStatus.OK, "3001", "좋아요 상태가 변경되었습니다."),
 
     //4000: Book 성공 코드
     BOOK_READ_SUCCESS(HttpStatus.OK, "4001", "도서 조회 성공"),
+    BOOK_RENT_SUCCESS(HttpStatus.OK, "4002", "도서가 대여되었습니다."),
+    BOOK_RETURN_SUCCESS(HttpStatus.OK, "4003", "도서가 반납되었습니다."),
 
     // 7000: ADMIN 성공 코드
     BOOK_CREATE_SUCCESS(HttpStatus.CREATED, "7001", "책 등록이 완료되었습니다."),
