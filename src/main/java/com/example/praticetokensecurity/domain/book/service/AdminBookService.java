@@ -50,5 +50,13 @@ public class AdminBookService {
             bookPage.getTotalElements());
     }
 
+    @Transactional
+    public void deleteBook(Long id) {
+        Book book = bookRepository.findByIdAndIsDeletedFalse(id)
+            .orElseThrow(() -> new ApiException(ErrorStatus.BOOK_NOT_FOUND));
+        book.delete();
+    }
+
+
 
 }
