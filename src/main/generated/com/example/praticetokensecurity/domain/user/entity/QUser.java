@@ -22,12 +22,16 @@ public class QUser extends EntityPathBase<User> {
 
     public final com.example.praticetokensecurity.common.entity.QTimeStamped _super = new com.example.praticetokensecurity.common.entity.QTimeStamped(this);
 
+    public final ListPath<com.example.praticetokensecurity.domain.book.entity.Book, com.example.praticetokensecurity.domain.book.entity.QBook> books = this.<com.example.praticetokensecurity.domain.book.entity.Book, com.example.praticetokensecurity.domain.book.entity.QBook>createList("books", com.example.praticetokensecurity.domain.book.entity.Book.class, com.example.praticetokensecurity.domain.book.entity.QBook.class, PathInits.DIRECT2);
+
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
 
     public final StringPath email = createString("email");
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
+
+    public final BooleanPath isDeleted = createBoolean("isDeleted");
 
     public final ListPath<com.example.praticetokensecurity.domain.like.entity.Like, com.example.praticetokensecurity.domain.like.entity.QLike> likes = this.<com.example.praticetokensecurity.domain.like.entity.Like, com.example.praticetokensecurity.domain.like.entity.QLike>createList("likes", com.example.praticetokensecurity.domain.like.entity.Like.class, com.example.praticetokensecurity.domain.like.entity.QLike.class, PathInits.DIRECT2);
 
