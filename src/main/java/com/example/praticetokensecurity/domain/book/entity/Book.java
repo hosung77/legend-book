@@ -47,6 +47,8 @@ public class Book extends TimeStamped {
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Like> likes = new ArrayList<>();
 
+    private boolean isDeleted = false;
+
     public Book(String title, String authorName, String publisher, BookStatus bookStatus) {
         this.title = title;
         this.authorName = authorName;
@@ -91,4 +93,8 @@ public class Book extends TimeStamped {
     public void clearUser() {
         this.user = null;
     }
+    public void delete() {
+        this.isDeleted = true;
+    }
+
 }
