@@ -19,6 +19,8 @@ public enum SuccessStatus implements BaseCode {
     USER_GET_SUCCESS(HttpStatus.OK, "2001", "유저 조회 성공"),
     USER_DELETE_SUCCESS(HttpStatus.OK, "2002", "유저 삭제 성공"),
     USER_BOOK_LIST_SUCCESS(HttpStatus.OK, "2003", "대여한 도서 목록 조회 성공"),
+    USER_UPDATE_SUCCESS(HttpStatus.OK, "2004", "유저 수정 성공"),
+
 
     // 3000: like 성공 코드
     LIKE_SUCCESS(HttpStatus.OK, "3001", "좋아요 상태가 변경되었습니다."),
