@@ -16,6 +16,8 @@ public enum ErrorStatus implements BaseErrorCode {
     PASSWORD_NOT_MATCH(HttpStatus.BAD_REQUEST, "1013", "비밀번호가 일치하지 않습니다."),
     AlREADY_EXIST_USER(HttpStatus.BAD_REQUEST, "1014", "이미 존재하는 유저입니다."),
 
+    //2000:  User
+
     // 4000: Book
     BOOK_NOT_FOUND(HttpStatus.NOT_FOUND, "4011", "해당 도서를 찾을 수 없습니다."),
     INVALID_BOOK_STATUS(HttpStatus.BAD_REQUEST, "4012", "도서 상태 값이 유효하지 않습니다."),
