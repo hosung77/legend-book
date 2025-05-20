@@ -3,6 +3,8 @@ package com.example.praticetokensecurity.domain.user.controller;
 import com.example.praticetokensecurity.common.code.SuccessStatus;
 import com.example.praticetokensecurity.common.response.ApiResponse;
 import com.example.praticetokensecurity.domain.book.dto.responseDto.RentedBookResponseDto;
+import com.example.praticetokensecurity.domain.like.dto.response.LikedResponseDto;
+import com.example.praticetokensecurity.domain.user.dto.request.UserUpdateRequestDto;
 import com.example.praticetokensecurity.domain.user.dto.request.UserDeleteRequestDto;
 import com.example.praticetokensecurity.domain.user.dto.request.UserUpdateRequestDto;
 import com.example.praticetokensecurity.domain.user.dto.response.UserResponseDto;
@@ -69,5 +71,15 @@ public class UserController {
     }
 
 
+    @GetMapping("/users/likes")
+    public ResponseEntity<ApiResponse<Page<LikedResponseDto>>> getMyLikedBook(
+        @AuthenticationPrincipal CustomUserPrincipal authUser,
+        @PageableDefault(page = 0, size = 10) Pageable pageable
+    ) {
+        Page<LikedResponseDto> myLikedBook = userService.getMyLikedBook(authUser.getUser().getId(),
+            pageable);
+
+        return ApiResponse.onSuccess(SuccessStatus.USER_LIKED_LIST_SUCCESS, myLikedBook);
+    }
 
 }
