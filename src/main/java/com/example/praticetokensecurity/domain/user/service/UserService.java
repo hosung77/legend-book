@@ -6,6 +6,8 @@ import com.example.praticetokensecurity.domain.book.dto.responseDto.RentedBookRe
 import com.example.praticetokensecurity.domain.book.entity.Book;
 import com.example.praticetokensecurity.domain.book.enums.BookStatus;
 import com.example.praticetokensecurity.domain.book.repository.BookRepository;
+import com.example.praticetokensecurity.domain.user.dto.request.UserDeleteRequestDto;
+import com.example.praticetokensecurity.domain.user.dto.request.UserUpdateRequestDto;
 import com.example.praticetokensecurity.domain.like.dto.response.LikedResponseDto;
 import com.example.praticetokensecurity.domain.like.entity.Like;
 import com.example.praticetokensecurity.domain.like.repository.LikeRepository;
@@ -14,6 +16,7 @@ import com.example.praticetokensecurity.domain.user.dto.response.UserResponseDto
 import com.example.praticetokensecurity.domain.user.entity.CustomUserPrincipal;
 import com.example.praticetokensecurity.domain.user.entity.User;
 import com.example.praticetokensecurity.domain.user.repository.UserRepository;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -79,6 +82,29 @@ public class UserService {
             BookStatus.RENTED, pageable);
         return books.map(RentedBookResponseDto::from);
     }
+
+    @Transactional
+    public void deleteUser(CustomUserPrincipal authUser, UserDeleteRequestDto requestDto) {
+        User user = userRepository.findById(authUser.getUser().getId())
+            .orElseThrow(() -> new ApiException(ErrorStatus.USER_NOT_FOUND));
+
+        if (!passwordEncoder.matches(requestDto.getPassword(), user.getPassword())) {
+            throw new ApiException(ErrorStatus.PASSWORD_NOT_MATCH);
+        }
+
+        // 대여 중인 도서들 반납 처리
+        List<Book> rentedBooks = bookRepository.findAllByUserIdAndBookStatus(
+            user.getId(), BookStatus.RENTED
+        );
+
+        for (Book book : rentedBooks) {
+            book.returnBookByForce();
+        }
+
+        user.delete();
+    }
+
+
 
     public Page<LikedResponseDto> getMyLikedBook(Long userId, Pageable pageable) {
         Page<Like> likes = likeRepository.findByUserId(userId, pageable);

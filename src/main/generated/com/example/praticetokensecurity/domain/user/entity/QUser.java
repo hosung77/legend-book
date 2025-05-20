@@ -31,6 +31,8 @@ public class QUser extends EntityPathBase<User> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
+    public final BooleanPath isDeleted = createBoolean("isDeleted");
+
     public final ListPath<com.example.praticetokensecurity.domain.like.entity.Like, com.example.praticetokensecurity.domain.like.entity.QLike> likes = this.<com.example.praticetokensecurity.domain.like.entity.Like, com.example.praticetokensecurity.domain.like.entity.QLike>createList("likes", com.example.praticetokensecurity.domain.like.entity.Like.class, com.example.praticetokensecurity.domain.like.entity.QLike.class, PathInits.DIRECT2);
 
     //inherited

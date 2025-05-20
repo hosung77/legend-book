@@ -2,6 +2,7 @@ package com.example.praticetokensecurity.domain.book.repository;
 
 import com.example.praticetokensecurity.domain.book.entity.Book;
 import com.example.praticetokensecurity.domain.book.enums.BookStatus;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,5 +21,8 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     Optional<Book> findByIdAndIsDeletedFalse(Long id);
 
     Page<Book> findAllByIsDeletedFalse(Pageable pageable);
+
+    List<Book> findAllByUserIdAndBookStatus(Long userId, BookStatus bookStatus);
+
 
 }
