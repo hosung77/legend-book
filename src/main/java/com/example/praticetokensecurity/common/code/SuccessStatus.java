@@ -17,7 +17,8 @@ public enum SuccessStatus implements BaseCode {
 
     //2000: User 성공 코드
     USER_GET_SUCCESS(HttpStatus.OK, "2001", "유저 조회 성공"),
-    USER_DELETE_SUCCESS(HttpStatus.OK, "2005", "유저 삭제 성공"),
+    USER_DELETE_SUCCESS(HttpStatus.OK, "2002", "유저 삭제 성공"),
+    USER_BOOK_LIST_SUCCESS(HttpStatus.OK, "2003", "대여한 도서 목록 조회 성공"),
 
     //4000: Book 성공 코드
     BOOK_READ_SUCCESS(HttpStatus.OK, "4001", "도서 조회 성공"),
