@@ -2,6 +2,7 @@ package com.example.praticetokensecurity.domain.user.entity;
 
 import com.example.praticetokensecurity.common.entity.TimeStamped;
 import com.example.praticetokensecurity.domain.like.entity.Like;
+import com.example.praticetokensecurity.domain.user.dto.request.UserUpdateRequestDto;
 import com.example.praticetokensecurity.domain.user.enums.UserRole;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -57,7 +58,21 @@ public class User extends TimeStamped {
         return new User(email, password, userRole, userName, phoneNum);
     }
 
-    public void updateLike(Like like){
+    public void updatePassword(String newPassword) {
+        this.password = newPassword;
+    }
+
+    public void update(UserUpdateRequestDto dto) {
+        if (dto.getUserName() != null && !dto.getUserName().isBlank()) {
+            this.userName = dto.getUserName();
+        }
+        if (dto.getPhoneNum() != null && !dto.getPhoneNum().isBlank()) {
+            this.phoneNum = dto.getPhoneNum();
+        }
+    }
+
+
+    public void updateLike(Like like) {
         this.likes.add(like);
     }
 
