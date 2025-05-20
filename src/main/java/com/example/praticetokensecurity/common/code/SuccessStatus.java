@@ -15,7 +15,6 @@ public enum SuccessStatus implements BaseCode {
     REISSUE_SUCCESS(HttpStatus.OK, "1003", "토큰이 재발급되었습니다."),
     LOGOUT_SUCCESS(HttpStatus.OK, "1004", "로그아웃이 완료되었습니다."),
 
-
     //4000: Book 성공 코드
     BOOK_READ_SUCCESS(HttpStatus.OK, "4001", "도서 조회 성공"),
 
@@ -26,7 +25,10 @@ public enum SuccessStatus implements BaseCode {
 
 
     // 3000 like
-    LIKE_SUCCESS(HttpStatus.OK,"3001","좋아요 상태가 변경되었습니다.");
+    LIKE_SUCCESS(HttpStatus.OK,"3001","좋아요 상태가 변경되었습니다."),
+
+    // 6000 keyword
+    GET_FAVORITE_KEYWORD_SUCCESS(HttpStatus.OK,"5001","키워드 조회가 왼료되었습니다.");
 
     private final HttpStatus httpStatus;
     private final String code;
