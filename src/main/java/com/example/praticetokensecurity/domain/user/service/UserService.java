@@ -2,11 +2,14 @@ package com.example.praticetokensecurity.domain.user.service;
 
 import com.example.praticetokensecurity.common.code.ErrorStatus;
 import com.example.praticetokensecurity.common.error.ApiException;
-import com.example.praticetokensecurity.domain.user.dto.request.UserUpdateRequestDto;
 import com.example.praticetokensecurity.domain.book.dto.responseDto.RentedBookResponseDto;
 import com.example.praticetokensecurity.domain.book.entity.Book;
 import com.example.praticetokensecurity.domain.book.enums.BookStatus;
 import com.example.praticetokensecurity.domain.book.repository.BookRepository;
+import com.example.praticetokensecurity.domain.like.dto.response.LikedResponseDto;
+import com.example.praticetokensecurity.domain.like.entity.Like;
+import com.example.praticetokensecurity.domain.like.repository.LikeRepository;
+import com.example.praticetokensecurity.domain.user.dto.request.UserUpdateRequestDto;
 import com.example.praticetokensecurity.domain.user.dto.response.UserResponseDto;
 import com.example.praticetokensecurity.domain.user.entity.CustomUserPrincipal;
 import com.example.praticetokensecurity.domain.user.entity.User;
@@ -26,6 +29,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final BookRepository bookRepository;
+    private final LikeRepository likeRepository;
 
     @Transactional(readOnly = true)
     public UserResponseDto findOne(@AuthenticationPrincipal CustomUserPrincipal authUser) {
@@ -74,5 +78,10 @@ public class UserService {
         Page<Book> books = bookRepository.findByUserIdAndBookStatus(userId,
             BookStatus.RENTED, pageable);
         return books.map(RentedBookResponseDto::from);
+    }
+
+    public Page<LikedResponseDto> getMyLikedBook(Long userId, Pageable pageable) {
+        Page<Like> likes = likeRepository.findByUserId(userId, pageable);
+        return likes.map(LikedResponseDto::from);
     }
 }

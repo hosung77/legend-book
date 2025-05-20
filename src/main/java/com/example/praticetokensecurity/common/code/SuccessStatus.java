@@ -20,6 +20,7 @@ public enum SuccessStatus implements BaseCode {
     USER_DELETE_SUCCESS(HttpStatus.OK, "2002", "유저 삭제 성공"),
     USER_BOOK_LIST_SUCCESS(HttpStatus.OK, "2003", "대여한 도서 목록 조회 성공"),
     USER_UPDATE_SUCCESS(HttpStatus.OK, "2004", "유저 수정 성공"),
+    USER_LIKED_LIST_SUCCESS(HttpStatus.OK, "2005", "좋아요한 도서 목록 조회 성공"),
 
 
     // 3000: like 성공 코드
@@ -31,7 +32,7 @@ public enum SuccessStatus implements BaseCode {
     BOOK_RETURN_SUCCESS(HttpStatus.OK, "4003", "도서가 반납되었습니다."),
 
     // 6000 keyword
-    GET_FAVORITE_KEYWORD_SUCCESS(HttpStatus.OK,"5001","키워드 조회가 왼료되었습니다."),
+    GET_FAVORITE_KEYWORD_SUCCESS(HttpStatus.OK, "5001", "키워드 조회가 왼료되었습니다."),
 
     // 7000: ADMIN 성공 코드
     BOOK_CREATE_SUCCESS(HttpStatus.CREATED, "7001", "책 등록이 완료되었습니다."),

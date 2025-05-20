@@ -48,7 +48,7 @@ public class QLike extends EntityPathBase<Like> {
 
     public QLike(Class<? extends Like> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.book = inits.isInitialized("book") ? new com.example.praticetokensecurity.domain.book.entity.QBook(forProperty("book")) : null;
+        this.book = inits.isInitialized("book") ? new com.example.praticetokensecurity.domain.book.entity.QBook(forProperty("book"), inits.get("book")) : null;
         this.user = inits.isInitialized("user") ? new com.example.praticetokensecurity.domain.user.entity.QUser(forProperty("user")) : null;
     }
 
