@@ -10,6 +10,7 @@ import com.example.praticetokensecurity.domain.book.service.AdminBookService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,4 +53,11 @@ public class AdminBookController {
             size);
         return ApiResponse.onSuccess(SuccessStatus.GET_ALL_BOOKS_SUCCESS, responseDto);
     }
+
+    @DeleteMapping("/admin/books/{id}")
+    public ResponseEntity<ApiResponse<Void>> deleteBook(@PathVariable Long id) {
+        adminBookService.deleteBook(id);
+        return ApiResponse.onSuccess(SuccessStatus.BOOK_DELETE_SUCCESS);
+    }
+
 }
