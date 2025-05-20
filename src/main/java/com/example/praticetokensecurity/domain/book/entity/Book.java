@@ -93,8 +93,15 @@ public class Book extends TimeStamped {
     public void clearUser() {
         this.user = null;
     }
+
     public void delete() {
         this.isDeleted = true;
     }
+
+    public void returnBookByForce() {
+        this.bookStatus = BookStatus.AVAILABLE;
+        this.clearUser();
+    }
+
 
 }

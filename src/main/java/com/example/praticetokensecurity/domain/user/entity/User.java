@@ -48,6 +48,8 @@ public class User extends TimeStamped {
     @OneToMany(mappedBy = "user")
     private List<Book> books = new ArrayList<>();
 
+    private boolean isDeleted = false;
+
     public User(String email, String password, UserRole userRole, String userName,
         String phoneNum) {
         this.email = email;
@@ -77,6 +79,10 @@ public class User extends TimeStamped {
 
     public void updateLike(Like like) {
         this.likes.add(like);
+    }
+
+    public void delete() {
+        this.isDeleted = true;
     }
 
 }

@@ -18,6 +18,8 @@ public class QBook extends EntityPathBase<Book> {
 
     private static final long serialVersionUID = 1370338623L;
 
+    private static final PathInits INITS = PathInits.DIRECT2;
+
     public static final QBook book = new QBook("book");
 
     public final com.example.praticetokensecurity.common.entity.QTimeStamped _super = new com.example.praticetokensecurity.common.entity.QTimeStamped(this);
@@ -31,6 +33,8 @@ public class QBook extends EntityPathBase<Book> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
+    public final BooleanPath isDeleted = createBoolean("isDeleted");
+
     public final ListPath<com.example.praticetokensecurity.domain.like.entity.Like, com.example.praticetokensecurity.domain.like.entity.QLike> likes = this.<com.example.praticetokensecurity.domain.like.entity.Like, com.example.praticetokensecurity.domain.like.entity.QLike>createList("likes", com.example.praticetokensecurity.domain.like.entity.Like.class, com.example.praticetokensecurity.domain.like.entity.QLike.class, PathInits.DIRECT2);
 
     //inherited
@@ -40,16 +44,27 @@ public class QBook extends EntityPathBase<Book> {
 
     public final StringPath title = createString("title");
 
+    public final com.example.praticetokensecurity.domain.user.entity.QUser user;
+
     public QBook(String variable) {
-        super(Book.class, forVariable(variable));
+        this(Book.class, forVariable(variable), INITS);
     }
 
     public QBook(Path<? extends Book> path) {
-        super(path.getType(), path.getMetadata());
+        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
     public QBook(PathMetadata metadata) {
-        super(Book.class, metadata);
+        this(metadata, PathInits.getFor(metadata, INITS));
+    }
+
+    public QBook(PathMetadata metadata, PathInits inits) {
+        this(Book.class, metadata, inits);
+    }
+
+    public QBook(Class<? extends Book> type, PathMetadata metadata, PathInits inits) {
+        super(type, metadata, inits);
+        this.user = inits.isInitialized("user") ? new com.example.praticetokensecurity.domain.user.entity.QUser(forProperty("user")) : null;
     }
 
 }
