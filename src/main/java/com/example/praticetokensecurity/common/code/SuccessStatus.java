@@ -28,6 +28,9 @@ public enum SuccessStatus implements BaseCode {
     BOOK_RENT_SUCCESS(HttpStatus.OK, "4002", "도서가 대여되었습니다."),
     BOOK_RETURN_SUCCESS(HttpStatus.OK, "4003", "도서가 반납되었습니다."),
 
+    // 6000 keyword
+    GET_FAVORITE_KEYWORD_SUCCESS(HttpStatus.OK,"5001","키워드 조회가 왼료되었습니다."),
+
     // 7000: ADMIN 성공 코드
     BOOK_CREATE_SUCCESS(HttpStatus.CREATED, "7001", "책 등록이 완료되었습니다."),
     BOOK_UPDATE_SUCCESS(HttpStatus.OK, "7002", "책 정보 수정이 완료되었습니다."),
