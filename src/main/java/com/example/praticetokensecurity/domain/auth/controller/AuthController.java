@@ -2,7 +2,6 @@ package com.example.praticetokensecurity.domain.auth.controller;
 
 import com.example.praticetokensecurity.common.code.SuccessStatus;
 import com.example.praticetokensecurity.common.response.ApiResponse;
-import com.example.praticetokensecurity.config.JwtTokenProvider;
 import com.example.praticetokensecurity.domain.auth.dto.request.LoginRequestDto;
 import com.example.praticetokensecurity.domain.auth.dto.request.SignUpRequestDto;
 import com.example.praticetokensecurity.domain.auth.dto.response.LoginResponseDto;
@@ -24,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/auth")
 public class AuthController {
 
-    private final JwtTokenProvider jwtTokenProvider;
+    // private final JwtTokenProvider jwtTokenProvider;
     private final AuthService authService;
     private final RefreshTokenService refreshTokenService;
 
