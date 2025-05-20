@@ -18,6 +18,8 @@ public enum SuccessStatus implements BaseCode {
 
     //4000: Book 성공 코드
     BOOK_READ_SUCCESS(HttpStatus.OK, "4001", "도서 조회 성공"),
+    BOOK_RENT_SUCCESS(HttpStatus.OK, "4002", "도서가 대여되었습니다."),
+    BOOK_RETURN_SUCCESS(HttpStatus.OK, "4003", "도서가 반납되었습니다."),
 
     // 2000: 책 성공 코드
     BOOK_CREATE_SUCCESS(HttpStatus.CREATED, "2001", "책 등록이 완료되었습니다."),
@@ -26,7 +28,7 @@ public enum SuccessStatus implements BaseCode {
 
 
     // 3000 like
-    LIKE_SUCCESS(HttpStatus.OK,"3001","좋아요 상태가 변경되었습니다.");
+    LIKE_SUCCESS(HttpStatus.OK, "3001", "좋아요 상태가 변경되었습니다.");
 
     private final HttpStatus httpStatus;
     private final String code;

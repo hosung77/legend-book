@@ -5,13 +5,16 @@ import com.example.praticetokensecurity.domain.book.dto.requestDto.AdminBookRequ
 import com.example.praticetokensecurity.domain.book.dto.requestDto.AdminBookUpdateRequestDto;
 import com.example.praticetokensecurity.domain.book.enums.BookStatus;
 import com.example.praticetokensecurity.domain.like.entity.Like;
+import com.example.praticetokensecurity.domain.user.entity.User;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.util.ArrayList;
@@ -34,6 +37,9 @@ public class Book extends TimeStamped {
     private String authorName;
 
     private String publisher;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private User user;
 
     @Enumerated(EnumType.STRING)
     private BookStatus bookStatus = BookStatus.AVAILABLE;
@@ -73,4 +79,16 @@ public class Book extends TimeStamped {
         this.bookStatus = bookStatus;
     }
 
+    public void updateStatus(BookStatus newStatus) {
+        this.bookStatus = newStatus;
+    }
+
+
+    public void assignUser(User user) {
+        this.user = user;
+    }
+
+    public void clearUser() {
+        this.user = null;
+    }
 }
