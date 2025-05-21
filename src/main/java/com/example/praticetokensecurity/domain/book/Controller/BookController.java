@@ -43,12 +43,22 @@ public class BookController {
     /**
      * 도서 키워드 검색
      **/
-    @GetMapping("/books")
+    @GetMapping("/v2/books")
     public ResponseEntity<ApiResponse<Page<BookResponseDto>>> searchByKeyword(
         @RequestParam(required = false) String keyword,
         @PageableDefault(page = 0, size = 10) Pageable pageable
     ) {
         Page<BookResponseDto> response = bookService.searchByTitle(keyword, pageable);
+        return ApiResponse.onSuccess(SuccessStatus.BOOK_READ_SUCCESS, response);
+    }
+
+    // 캐시 X
+    @GetMapping("/v1/books")
+    public ResponseEntity<ApiResponse<Page<BookResponseDto>>> searchBooksWithoutCache(
+        @RequestParam(required = false) String keyword,
+        @PageableDefault(page = 0, size = 10) Pageable pageable
+    ) {
+        Page<BookResponseDto> response = bookService.searchByTitleWithoutCache(keyword, pageable);
         return ApiResponse.onSuccess(SuccessStatus.BOOK_READ_SUCCESS, response);
     }
 
