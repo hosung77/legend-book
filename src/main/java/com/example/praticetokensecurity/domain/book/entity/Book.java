@@ -98,7 +98,7 @@ public class Book extends TimeStamped {
         this.isDeleted = true;
     }
 
-    public void returnBookByForce() {
+    public void itsNotYourBook() {
         this.bookStatus = BookStatus.AVAILABLE;
         this.clearUser();
     }

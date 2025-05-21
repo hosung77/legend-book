@@ -6,11 +6,10 @@ import com.example.praticetokensecurity.domain.book.dto.responseDto.RentedBookRe
 import com.example.praticetokensecurity.domain.book.entity.Book;
 import com.example.praticetokensecurity.domain.book.enums.BookStatus;
 import com.example.praticetokensecurity.domain.book.repository.BookRepository;
-import com.example.praticetokensecurity.domain.user.dto.request.UserDeleteRequestDto;
-import com.example.praticetokensecurity.domain.user.dto.request.UserUpdateRequestDto;
 import com.example.praticetokensecurity.domain.like.dto.response.LikedResponseDto;
 import com.example.praticetokensecurity.domain.like.entity.Like;
 import com.example.praticetokensecurity.domain.like.repository.LikeRepository;
+import com.example.praticetokensecurity.domain.user.dto.request.UserDeleteRequestDto;
 import com.example.praticetokensecurity.domain.user.dto.request.UserUpdateRequestDto;
 import com.example.praticetokensecurity.domain.user.dto.response.UserResponseDto;
 import com.example.praticetokensecurity.domain.user.entity.CustomUserPrincipal;
@@ -98,7 +97,7 @@ public class UserService {
         );
 
         for (Book book : rentedBooks) {
-            book.returnBookByForce();
+            book.itsNotYourBook();
         }
 
         user.delete();
