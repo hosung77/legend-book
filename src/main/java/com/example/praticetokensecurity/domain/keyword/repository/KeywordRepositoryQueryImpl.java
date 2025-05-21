@@ -27,6 +27,7 @@ public class KeywordRepositoryQueryImpl implements KeywordRepositoryQuery{
             .from(keyword)
             .groupBy(keyword.keyword)
             .orderBy(count.desc())
+            .limit(5)
             .fetch();
 
         return result;
