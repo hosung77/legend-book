@@ -12,6 +12,7 @@ import com.example.praticetokensecurity.domain.keyword.repository.KeywordReposit
 import com.example.praticetokensecurity.domain.user.entity.User;
 import com.example.praticetokensecurity.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -34,12 +35,21 @@ public class BookService {
         return BookResponseDto.from(book);
     }
 
-    @Transactional
+    // 캐시 o
+    @Cacheable(value = "bookSearchCache", key = "#keyword + '_' + #pageable.pageNumber + '_' + #pageable.pageSize")
     public Page<BookResponseDto> searchByTitle(String keyword, Pageable pageable) {
         Page<Book> searchedBooks = bookRepository.findByTitle(keyword, pageable);
         keywordRepository.save(Keyword.of(keyword));
         return BookResponseDto.fromEntityPage(searchedBooks);
     }
+
+    // 캐시 x
+    public Page<BookResponseDto> searchByTitleWithoutCache(String keyword, Pageable pageable) {
+        Page<Book> searchedBooks = bookRepository.findByTitle(keyword, pageable);
+        keywordRepository.save(Keyword.of(keyword));
+        return BookResponseDto.fromEntityPage(searchedBooks);
+    }
+
 
     /**
      * 도서 대여

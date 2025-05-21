@@ -98,7 +98,7 @@ public class UserService {
         );
 
         for (Book book : rentedBooks) {
-            book.returnBookByForce();
+            book.itsNotYourBook();
         }
 
         user.delete();
