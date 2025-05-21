@@ -38,6 +38,7 @@ public class AdminBookService {
 
     @Transactional(readOnly = true)
     public AdminPageResponse<AdminBookResponseDto> getAllBooks(int page, int size) {
+        //생성일 기준 내림차순 정렬
         Pageable pageable = PageRequest.of(page - 1, size, Sort.by("createdAt").descending());
 
         Page<Book> bookPage = bookRepository.findAllByIsDeletedFalse(pageable);
