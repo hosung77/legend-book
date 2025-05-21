@@ -6,11 +6,10 @@ import com.example.praticetokensecurity.domain.book.dto.responseDto.RentedBookRe
 import com.example.praticetokensecurity.domain.book.entity.Book;
 import com.example.praticetokensecurity.domain.book.enums.BookStatus;
 import com.example.praticetokensecurity.domain.book.repository.BookRepository;
-import com.example.praticetokensecurity.domain.user.dto.request.UserDeleteRequestDto;
-import com.example.praticetokensecurity.domain.user.dto.request.UserUpdateRequestDto;
 import com.example.praticetokensecurity.domain.like.dto.response.LikedResponseDto;
 import com.example.praticetokensecurity.domain.like.entity.Like;
 import com.example.praticetokensecurity.domain.like.repository.LikeRepository;
+import com.example.praticetokensecurity.domain.user.dto.request.UserDeleteRequestDto;
 import com.example.praticetokensecurity.domain.user.dto.request.UserUpdateRequestDto;
 import com.example.praticetokensecurity.domain.user.dto.response.UserResponseDto;
 import com.example.praticetokensecurity.domain.user.entity.CustomUserPrincipal;
@@ -18,6 +17,7 @@ import com.example.praticetokensecurity.domain.user.entity.User;
 import com.example.praticetokensecurity.domain.user.repository.UserRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -105,8 +105,13 @@ public class UserService {
     }
 
 
-
     public Page<LikedResponseDto> getMyLikedBook(Long userId, Pageable pageable) {
+        Page<Like> likes = likeRepository.findByUserId(userId, pageable);
+        return likes.map(LikedResponseDto::from);
+    }
+
+    @Cacheable(value = "likes", key = "#userId + '_' + #pageable.pageNumber")
+    public Page<LikedResponseDto> getMyLikedBookV2(Long userId, Pageable pageable) {
         Page<Like> likes = likeRepository.findByUserId(userId, pageable);
         return likes.map(LikedResponseDto::from);
     }

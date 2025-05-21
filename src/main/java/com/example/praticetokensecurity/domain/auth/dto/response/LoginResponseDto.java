@@ -8,8 +8,14 @@ import lombok.NoArgsConstructor;
 public class LoginResponseDto {
 
     String accessToken;
+    String refreshToken;
 
     public LoginResponseDto(String accessToken) {
         this.accessToken = accessToken;
+    }
+
+    public LoginResponseDto(String accessToken, String refreshToken) {
+        this.accessToken = accessToken;
+        this.refreshToken = refreshToken;
     }
 }

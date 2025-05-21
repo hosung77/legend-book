@@ -5,7 +5,6 @@ import com.example.praticetokensecurity.common.error.ApiException;
 import com.example.praticetokensecurity.config.JwtTokenProvider;
 import com.example.praticetokensecurity.domain.auth.dto.response.LoginResponseDto;
 import com.example.praticetokensecurity.domain.auth.dto.response.SignUpResponseDto;
-import com.example.praticetokensecurity.domain.token.entity.RefreshToken;
 import com.example.praticetokensecurity.domain.token.service.RefreshTokenService;
 import com.example.praticetokensecurity.domain.user.entity.User;
 import com.example.praticetokensecurity.domain.user.enums.UserRole;
@@ -55,8 +54,8 @@ public class AuthService {
         String accessToken = jwtTokenProvider.createAccessToken(user);
         String refreshToken = jwtTokenProvider.createRefreshToken(user);
 
-        RefreshToken savedRefreshToken = refreshTokenService.saveToken(refreshToken, user.getId());
+        refreshTokenService.saveToken(refreshToken, user.getId());
 
-        return new LoginResponseDto(accessToken);
+        return new LoginResponseDto(accessToken, refreshToken);
     }
 }

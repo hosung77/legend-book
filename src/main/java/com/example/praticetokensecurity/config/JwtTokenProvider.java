@@ -12,7 +12,6 @@ import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import jakarta.annotation.PostConstruct;
-import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
@@ -41,7 +40,7 @@ public class JwtTokenProvider {
 
     public String createAccessToken(User user) {
         Date now = new Date();
-        long accessTokenExpireTime = 60 * 60 * 1000L; // 1시간
+        long accessTokenExpireTime = 60 * 60 * 1000L; // 10초 1시간은 60*60
 
         return BEARER_PREFIX +
             Jwts.builder()
@@ -75,17 +74,21 @@ public class JwtTokenProvider {
     }
 
     public Claims extractClaims(String token) {
-        return Jwts.parserBuilder()
-            .setSigningKey(key)
-            .build()
-            .parseClaimsJws(token)//  token이 이 key로 서명되었는지 확인함
-            .getBody(); // 서명이 유효하면 claims(body)를 꺼냄
+        try {
+            return Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
+                .parseClaimsJws(token)//  token이 이 key로 서명되었는지 확인함
+                .getBody(); // 서명이 유효하면 claims(body)를 꺼냄
+        } catch (ExpiredJwtException e) {
+            return e.getClaims();
+        }
     }
 
     public boolean validateToken(String token) {
         try {
             Jwts.parserBuilder()
-                .setSigningKey(Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8)))
+                .setSigningKey(key)
                 .build()
                 .parseClaimsJws(token);
             return true;
@@ -99,6 +102,20 @@ public class JwtTokenProvider {
             log.warn("JWT 토큰이 비었습니다: {}", ex.getMessage());
         }
         return false;
+    }
+
+
+    public String getEmail(String token) {
+
+        String subject = Jwts.parserBuilder()
+            .setSigningKey(key)
+            .build()
+            .parseClaimsJws(token)
+            .getBody()
+            .getSubject();
+
+        System.out.println("✅ 파싱된 subject(email): " + subject);
+        return subject;
     }
 
 }

@@ -57,6 +57,8 @@ dependencies {
     implementation 'com.querydsl:querydsl-jpa:5.0.0:jakarta'
     implementation 'com.querydsl:querydsl-core:5.0.0'
 
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
+
     annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
 }
 
@@ -70,7 +72,7 @@ tasks.withType(JavaCompile) {
 
 // java source set 에 querydsl QClass 위치 추가
 sourceSets {
-    main.java.srcDirs += [ generated ]
+    main.java.srcDirs += [generated]
 }
 
 // gradle clean 시에 QClass 디렉토리 삭제
