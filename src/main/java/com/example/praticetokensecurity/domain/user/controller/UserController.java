@@ -4,7 +4,6 @@ import com.example.praticetokensecurity.common.code.SuccessStatus;
 import com.example.praticetokensecurity.common.response.ApiResponse;
 import com.example.praticetokensecurity.domain.book.dto.responseDto.RentedBookResponseDto;
 import com.example.praticetokensecurity.domain.like.dto.response.LikedResponseDto;
-import com.example.praticetokensecurity.domain.user.dto.request.UserUpdateRequestDto;
 import com.example.praticetokensecurity.domain.user.dto.request.UserDeleteRequestDto;
 import com.example.praticetokensecurity.domain.user.dto.request.UserUpdateRequestDto;
 import com.example.praticetokensecurity.domain.user.dto.response.UserResponseDto;
@@ -26,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api")
+@RequestMapping("/api")
 public class UserController {
 
     private final UserService userService;
@@ -77,6 +76,18 @@ public class UserController {
         @PageableDefault(page = 0, size = 10) Pageable pageable
     ) {
         Page<LikedResponseDto> myLikedBook = userService.getMyLikedBook(authUser.getUser().getId(),
+            pageable);
+
+        return ApiResponse.onSuccess(SuccessStatus.USER_LIKED_LIST_SUCCESS, myLikedBook);
+    }
+
+    @GetMapping("/v2/users/likes")
+    public ResponseEntity<ApiResponse<Page<LikedResponseDto>>> getMyLikedBookV2(
+        @AuthenticationPrincipal CustomUserPrincipal authUser,
+        @PageableDefault(page = 0, size = 10) Pageable pageable
+    ) {
+        Page<LikedResponseDto> myLikedBook = userService.getMyLikedBookV2(
+            authUser.getUser().getId(),
             pageable);
 
         return ApiResponse.onSuccess(SuccessStatus.USER_LIKED_LIST_SUCCESS, myLikedBook);
