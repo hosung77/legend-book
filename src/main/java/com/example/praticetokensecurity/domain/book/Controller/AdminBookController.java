@@ -68,8 +68,24 @@ public class AdminBookController {
     public ResponseEntity<ApiResponse<AdminPageResponse<AdminBookResponseDto>>> getAllBooks(
         @RequestParam(defaultValue = "0") int page,
         @RequestParam(defaultValue = "10") int size) {
-
         AdminPageResponse<AdminBookResponseDto> responseDto = adminBookService.getAllBooks(page,
+            size);
+        return ApiResponse.onSuccess(SuccessStatus.GET_ALL_BOOKS_SUCCESS, responseDto);
+    }
+
+    /**
+     * 등록된 모든 도서 조회 v2
+     *
+     * @param page 조회할 페이지 번호
+     * @param size 한 페이지에 담을 데이터 수
+     * @return ApiResponse에 page response 형태로 책 정보들을 담아 반환
+     */
+    @GetMapping("/v2/admin/books")
+    public ResponseEntity<ApiResponse<AdminPageResponse<AdminBookResponseDto>>> getAllBooksV2(
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "10") int size) {
+
+        AdminPageResponse<AdminBookResponseDto> responseDto = adminBookService.getAllBooksV2(page,
             size);
         return ApiResponse.onSuccess(SuccessStatus.GET_ALL_BOOKS_SUCCESS, responseDto);
     }
