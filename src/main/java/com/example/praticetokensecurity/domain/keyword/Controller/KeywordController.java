@@ -12,14 +12,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/keyword")
+@RequestMapping("/api")
 @RequiredArgsConstructor
 public class KeywordController {
     private final KeywordService keywordService;
 
-    @GetMapping("/favorite")
+    @GetMapping("/v1/keyword/favorite")
     ResponseEntity<ApiResponse<List<Top5KeywordResponseDto>>> getFavoriteKeyword(){
         List<Top5KeywordResponseDto> response = keywordService.getFavoriteKeyword();
         return ApiResponse.onSuccess(SuccessStatus.GET_FAVORITE_KEYWORD_SUCCESS,response);
     }
+
+    @GetMapping("/v2/keyword/favorite")
+    ResponseEntity<ApiResponse<List<Top5KeywordResponseDto>>> getFavoriteKeyword2(){
+        List<Top5KeywordResponseDto> response = keywordService.getFavoriteKeyword2();
+        return ApiResponse.onSuccess(SuccessStatus.GET_FAVORITE_KEYWORD_SUCCESS,response);
+    }
+
+
+
 }
