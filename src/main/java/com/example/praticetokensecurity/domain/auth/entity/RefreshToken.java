@@ -1,4 +1,4 @@
-package com.example.praticetokensecurity.domain.token.entity;
+package com.example.praticetokensecurity.domain.auth.entity;
 
 import com.example.praticetokensecurity.common.entity.TimeStamped;
 import jakarta.persistence.Column;
