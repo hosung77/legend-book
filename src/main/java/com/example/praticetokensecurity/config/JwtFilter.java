@@ -39,6 +39,7 @@ public class JwtFilter extends OncePerRequestFilter {
             setAuthentication(email);
         } catch (ExpiredJwtException e) {
             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "AccessToken Expired");
+            return;
         }
         filterChain.doFilter(request, response);
     }
