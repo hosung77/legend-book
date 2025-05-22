@@ -1,4 +1,4 @@
-package com.example.praticetokensecurity.domain.keyword.Controller;
+package com.example.praticetokensecurity.domain.keyword.controller;
 
 import com.example.praticetokensecurity.domain.keyword.entity.Keyword;
 import com.example.praticetokensecurity.domain.keyword.repository.KeywordRepository;

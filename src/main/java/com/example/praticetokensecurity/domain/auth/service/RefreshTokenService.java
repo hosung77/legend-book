@@ -1,10 +1,10 @@
-package com.example.praticetokensecurity.domain.token.service;
+package com.example.praticetokensecurity.domain.auth.service;
 
 import com.example.praticetokensecurity.common.code.ErrorStatus;
 import com.example.praticetokensecurity.common.error.ApiException;
 import com.example.praticetokensecurity.config.JwtTokenProvider;
-import com.example.praticetokensecurity.domain.token.entity.RefreshToken;
-import com.example.praticetokensecurity.domain.token.repository.RefreshTokenRepository;
+import com.example.praticetokensecurity.domain.auth.entity.RefreshToken;
+import com.example.praticetokensecurity.domain.auth.repository.RefreshTokenRepository;
 import jakarta.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.Optional;

@@ -13,6 +13,8 @@ import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import jakarta.annotation.PostConstruct;
 import java.security.Key;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Base64;
 import java.util.Date;
 import lombok.extern.slf4j.Slf4j;
@@ -39,8 +41,11 @@ public class JwtTokenProvider {
 
 
     public String createAccessToken(User user) {
-        Date now = new Date();
-        long accessTokenExpireTime = 60 * 60 * 1000L; // 10초 1시간은 60*60
+        LocalDateTime expireTime = LocalDateTime.now().plusHours(1);
+        LocalDateTime nowTime = LocalDateTime.now();
+
+        Date expire = Date.from(expireTime.atZone(ZoneId.systemDefault()).toInstant());
+        Date now = Date.from(nowTime.atZone(ZoneId.systemDefault()).toInstant());
 
         return BEARER_PREFIX +
             Jwts.builder()
@@ -48,20 +53,23 @@ public class JwtTokenProvider {
                 .claim("userId", user.getId())
                 .claim("userRole", user.getUserRole())
                 .setIssuedAt(now)
-                .setExpiration(new Date(now.getTime() + accessTokenExpireTime))
+                .setExpiration(expire)
                 .signWith(key, signatureAlgorithm)
                 .compact();
     }
 
     public String createRefreshToken(User user) {
-        Date now = new Date();
-        long refreshTokenExpireTime = 7 * 24 * 60 * 60 * 1000L; // 1주
+        LocalDateTime expireTime = LocalDateTime.now().plusDays(7);
+        LocalDateTime nowTime = LocalDateTime.now();
+
+        Date expire = Date.from(expireTime.atZone(ZoneId.systemDefault()).toInstant());
+        Date now = Date.from(nowTime.atZone(ZoneId.systemDefault()).toInstant());
 
         return BEARER_PREFIX +
             Jwts.builder()
                 .setSubject(user.getEmail())
                 .setIssuedAt(now)
-                .setExpiration(new Date(now.getTime() + refreshTokenExpireTime))
+                .setExpiration(expire)
                 .signWith(key, signatureAlgorithm)
                 .compact();
     }

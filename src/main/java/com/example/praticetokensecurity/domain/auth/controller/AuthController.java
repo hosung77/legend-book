@@ -9,9 +9,9 @@ import com.example.praticetokensecurity.domain.auth.dto.request.LoginRequestDto;
 import com.example.praticetokensecurity.domain.auth.dto.request.SignUpRequestDto;
 import com.example.praticetokensecurity.domain.auth.dto.response.LoginResponseDto;
 import com.example.praticetokensecurity.domain.auth.dto.response.SignUpResponseDto;
+import com.example.praticetokensecurity.domain.auth.repository.RefreshTokenRepository;
 import com.example.praticetokensecurity.domain.auth.service.AuthService;
-import com.example.praticetokensecurity.domain.token.repository.RefreshTokenRepository;
-import com.example.praticetokensecurity.domain.token.service.RefreshTokenService;
+import com.example.praticetokensecurity.domain.auth.service.RefreshTokenService;
 import com.example.praticetokensecurity.domain.user.entity.CustomUserPrincipal;
 import com.example.praticetokensecurity.domain.user.entity.User;
 import com.example.praticetokensecurity.domain.user.repository.UserRepository;
@@ -47,14 +47,15 @@ public class AuthController {
             , signUpRequestDto.getUserName()
             , signUpRequestDto.getPhoneNum()
         );
-        return ApiResponse.onSuccess(SuccessStatus.SIGNUP_SUCCESS);
+        return ApiResponse.onSuccess(SuccessStatus.SIGNUP_SUCCESS, response);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponseDto> signIn(@Valid @RequestBody LoginRequestDto requestDto) {
+    public ResponseEntity<ApiResponse<LoginResponseDto>> signIn(
+        @Valid @RequestBody LoginRequestDto requestDto) {
         LoginResponseDto response = authService.signIn(requestDto.getEmail()
             , requestDto.getPassword());
-        return ResponseEntity.ok(response);
+        return ApiResponse.onSuccess(SuccessStatus.LOGIN_SUCCESS, response);
     }
 
     @PostMapping("/logout")
@@ -69,7 +70,7 @@ public class AuthController {
     }
 
     @PostMapping("/token/reissue")
-    public ResponseEntity<LoginResponseDto> reissue(HttpServletRequest request) {
+    public ResponseEntity<ApiResponse<LoginResponseDto>> reissue(HttpServletRequest request) {
         String refreshHeader = request.getHeader("Refresh-Token");
 
         // 1. 헤더 유효성 검사 및 Bearer 제거
@@ -100,9 +101,9 @@ public class AuthController {
         // 6. RefreshToken 갱신
         refreshTokenService.updateRefreshToken(user.getId(), newRefreshToken,
             LocalDateTime.now().plusDays(7));
-
         // 7. 응답
-        return ResponseEntity.ok(new LoginResponseDto(newAccessToken, newRefreshToken));
+        LoginResponseDto responseDto = new LoginResponseDto(newAccessToken, newRefreshToken);
+        return ApiResponse.onSuccess(SuccessStatus.REISSUE_SUCCESS, responseDto);
     }
 
 }
