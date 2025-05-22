@@ -51,7 +51,6 @@ public class AdminBookService {
     // condition page가 1일 때만 캐싱 애초에 db 쿼리가 하나인 것은 캐싱 처리를 해도 의미가 없다 ex) join이 많은 복잡한 쿼리
     @Cacheable(value = "books", key = "'page1'", condition = "#page == 1")
     public AdminPageResponse<AdminBookResponseDto> getAllBooksV2(int page, int size) {
-        System.out.println("캐시 제발 성공");
         Pageable pageable = PageRequest.of(page - 1, size, Sort.by("createdAt").descending());
 
         Page<Book> bookPage = bookRepository.findAllByIsDeletedFalse(pageable);
@@ -65,7 +64,6 @@ public class AdminBookService {
             .orElseThrow(() -> new ApiException(ErrorStatus.BOOK_NOT_FOUND));
         book.delete();
     }
-
 
 
 }

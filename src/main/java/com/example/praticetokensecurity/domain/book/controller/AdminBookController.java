@@ -1,4 +1,4 @@
-package com.example.praticetokensecurity.domain.book.Controller;
+package com.example.praticetokensecurity.domain.book.controller;
 
 import com.example.praticetokensecurity.common.code.SuccessStatus;
 import com.example.praticetokensecurity.common.response.ApiResponse;

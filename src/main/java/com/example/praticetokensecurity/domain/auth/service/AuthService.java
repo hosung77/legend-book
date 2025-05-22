@@ -5,12 +5,10 @@ import com.example.praticetokensecurity.common.error.ApiException;
 import com.example.praticetokensecurity.config.JwtTokenProvider;
 import com.example.praticetokensecurity.domain.auth.dto.response.LoginResponseDto;
 import com.example.praticetokensecurity.domain.auth.dto.response.SignUpResponseDto;
-import com.example.praticetokensecurity.domain.token.service.RefreshTokenService;
 import com.example.praticetokensecurity.domain.user.entity.User;
 import com.example.praticetokensecurity.domain.user.enums.UserRole;
 import com.example.praticetokensecurity.domain.user.repository.UserRepository;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -42,7 +40,7 @@ public class AuthService {
     }
 
     @Transactional
-    public LoginResponseDto signIn(@Valid String email, @Valid String password) {
+    public LoginResponseDto signIn(String email, String password) {
 
         User user = userRepository.findByEmail(email)
             .orElseThrow(() -> new ApiException(ErrorStatus.EMAIL_NOT_FOUND));
