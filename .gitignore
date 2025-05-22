@@ -39,3 +39,6 @@ out/
 # QueryDSL
 **/generated/
 /src/main/generated/
+
+# 환경 변수 파일 숨기기
+.env

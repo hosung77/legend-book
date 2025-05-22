@@ -74,15 +74,11 @@ public class JwtTokenProvider {
     }
 
     public Claims extractClaims(String token) {
-        try {
             return Jwts.parserBuilder()
                 .setSigningKey(key)
                 .build()
                 .parseClaimsJws(token)//  token이 이 key로 서명되었는지 확인함
                 .getBody(); // 서명이 유효하면 claims(body)를 꺼냄
-        } catch (ExpiredJwtException e) {
-            return e.getClaims();
-        }
     }
 
     public boolean validateToken(String token) {
