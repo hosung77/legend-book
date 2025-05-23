@@ -1,13 +1,14 @@
 package com.example.praticetokensecurity.domain.book.dto.responseDto;
 
 import com.example.praticetokensecurity.domain.book.entity.Book;
+import java.io.Serializable;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 
 @Getter
 @RequiredArgsConstructor
-public class BookResponseDto {
+public class BookResponseDto implements Serializable {
 
     private Long bookId;
     private String title;
@@ -15,7 +16,8 @@ public class BookResponseDto {
     private String publisher;
     private String bookStatus;
 
-    public BookResponseDto(Long bookId, String title, String authorName, String publisher, String bookStatus) {
+    public BookResponseDto(Long bookId, String title, String authorName, String publisher,
+        String bookStatus) {
         this.bookId = bookId;
         this.title = title;
         this.authorName = authorName;
