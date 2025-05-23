@@ -1,4 +1,4 @@
-package com.example.praticetokensecurity.book.service;
+package com.example.praticetokensecurity.domain.book.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -16,7 +16,6 @@ import com.example.praticetokensecurity.domain.book.dto.responseDto.RentalRespon
 import com.example.praticetokensecurity.domain.book.entity.Book;
 import com.example.praticetokensecurity.domain.book.enums.BookStatus;
 import com.example.praticetokensecurity.domain.book.repository.BookRepository;
-import com.example.praticetokensecurity.domain.book.service.BookService;
 import com.example.praticetokensecurity.domain.keyword.entity.Keyword;
 import com.example.praticetokensecurity.domain.keyword.repository.KeywordRepository;
 import com.example.praticetokensecurity.domain.user.entity.User;

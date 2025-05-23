@@ -1,4 +1,4 @@
-package com.example.praticetokensecurity.domain.user;
+package com.example.praticetokensecurity.domain.user.service;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -26,7 +26,6 @@ import com.example.praticetokensecurity.domain.user.entity.CustomUserPrincipal;
 import com.example.praticetokensecurity.domain.user.entity.User;
 import com.example.praticetokensecurity.domain.user.enums.UserRole;
 import com.example.praticetokensecurity.domain.user.repository.UserRepository;
-import com.example.praticetokensecurity.domain.user.service.UserService;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Assertions;
