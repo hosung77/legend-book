@@ -22,7 +22,7 @@ Spring의 @Cacheable 애노테이션을 활용하여 일정 시간 동안 결과
 
 ### 캐싱 처리 후 👍
 
-![hosungV2.png](image/hosungV2.png)
+![hsV2.png](image/hsV2.png)
 
 ---
 
