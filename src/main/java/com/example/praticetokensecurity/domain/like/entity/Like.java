@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Entity
-@Table(name = "like_book")
+@Table(name = "like_books")
 @NoArgsConstructor
 @Getter
 @ToString

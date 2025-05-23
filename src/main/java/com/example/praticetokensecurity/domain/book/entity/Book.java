@@ -23,7 +23,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "book")
+@Table(name = "books")
 @NoArgsConstructor
 @Getter
 public class Book extends TimeStamped {
