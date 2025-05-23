@@ -13,17 +13,19 @@
 Spring의 @Cacheable 애노테이션을 활용하여 일정 시간 동안 결과를 캐싱하도록 처리하였다.
 
 ---
+
 ### 캐싱 처리 전 😱
 
-![hsV1.png](image/hsV1.png)
+![hosungV1.png](image/hosungV1.png)
 
 ---
 
 ### 캐싱 처리 후 👍
 
-![hsV2.png](image/hsV2.png)
+![hosungV2.png](image/hosungV2.png)
 
 ---
+
 ### 처리 결과 📄
 
 - 불필요한 DB 조회 감소
