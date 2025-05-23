@@ -15,13 +15,13 @@ public class KeywordService {
 
     @Transactional(readOnly = true)
     public List<Top5KeywordResponseDto> getFavoriteKeyword() {
-        return keywordRepository.Top5KeywordResponseDto();
+        return keywordRepository.findTop5Keywords();
     }
 
     @Cacheable("top5Keywords")
     @Transactional(readOnly = true)
     public List<Top5KeywordResponseDto> getFavoriteKeyword2() {
-        return keywordRepository.Top5KeywordResponseDto();
+        return keywordRepository.findTop5Keywords();
     }
 
 }
