@@ -38,7 +38,7 @@ public Page<BookResponseDto> searchByTitleWithoutCache(String keyword, Pageable 
 
 ### 포스트맨 응답 시간 결과
 
-![img.png](image/img.png)
+![img.png](image/ysPostV2.png)
 
 ---
 
@@ -70,7 +70,7 @@ public Page<BookResponseDto> searchByTitle(String keyword, Pageable pageable) {
 
 ### 포스트맨 응답 시간 결과
 
-![img.png](image/postV2.png)
+![img.png](image/ysPostV1.png)
 
 ---
 
