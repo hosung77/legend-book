@@ -23,7 +23,7 @@ class KeywordServiceTest {
     private KeywordService keywordService;
 
     @Test
-    void getFavoriteKeyword2_ShouldReturnTop5Keywords() {
+    void 상위_5개_키워드_반환() {
         List<Top5KeywordResponseDto> mockResponse = Arrays.asList(
             new Top5KeywordResponseDto("keyword1", 50L),
             new Top5KeywordResponseDto("keyword2", 40L),
@@ -42,7 +42,7 @@ class KeywordServiceTest {
     }
 
     @Test
-    void getFavoriteKeyword2_ShouldReturnEmptyListWhenNoData() {
+    void 데이터가_없으면_빈_리스트_반환() {
         when(keywordRepository.findTop5Keywords()).thenReturn(List.of());
 
         List<Top5KeywordResponseDto> result = keywordService.getFavoriteKeyword2();

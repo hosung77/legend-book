@@ -34,7 +34,7 @@ public class LikeServiceTest {
     private BookRepository bookRepository;
 
     @Test
-    void toggleLike_successfullyCreatesLike() {
+    void 좋아요_토글_성공_새로운_좋아요_생성() {
         Long userId = 1L;
         Long bookId = 1L;
 
@@ -51,7 +51,7 @@ public class LikeServiceTest {
     }
 
     @Test
-    void toggleLike_successfullyTogglesExistingLike() {
+    void 좋아요_토글_성공_기존_좋아요_변경() {
         Long userId = 1L;
         Long bookId = 1L;
 
@@ -69,7 +69,7 @@ public class LikeServiceTest {
     }
 
     @Test
-    void toggleLike_throwsUserNotFoundException() {
+    void 좋아요_토글_실패_사용자_없음() {
         Long userId = 1L;
         Long bookId = 1L;
 
@@ -79,7 +79,7 @@ public class LikeServiceTest {
     }
 
     @Test
-    void toggleLike_throwsBookNotFoundException() {
+    void 좋아요_토글_실패_도서_없음() {
         Long userId = 1L;
         Long bookId = 1L;
 
