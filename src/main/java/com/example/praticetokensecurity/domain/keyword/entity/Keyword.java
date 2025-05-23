@@ -9,7 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "keyword")
+@Table(name = "keywords")
 @Getter
 public class Keyword {
 

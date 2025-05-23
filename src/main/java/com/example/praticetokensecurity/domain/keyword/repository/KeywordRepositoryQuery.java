@@ -4,5 +4,5 @@ import com.example.praticetokensecurity.domain.keyword.dto.response.Top5KeywordR
 import java.util.List;
 
 public interface KeywordRepositoryQuery {
-    List<Top5KeywordResponseDto> Top5KeywordResponseDto();
+    List<Top5KeywordResponseDto> findTop5Keywords();
 }

@@ -15,7 +15,7 @@ public class KeywordRepositoryQueryImpl implements KeywordRepositoryQuery{
     private final JPAQueryFactory jpaQueryFactory;
 
     @Override
-    public List<Top5KeywordResponseDto> Top5KeywordResponseDto() {
+    public List<Top5KeywordResponseDto> findTop5Keywords() {
         QKeyword keyword = QKeyword.keyword1;
 
         List<Top5KeywordResponseDto> result = jpaQueryFactory
