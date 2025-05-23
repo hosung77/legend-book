@@ -18,7 +18,7 @@ public class KeywordService {
         return keywordRepository.findTop5Keywords();
     }
 
-    @Cacheable("top5Keywords")
+    @Cacheable(value = "top5Keywords")
     @Transactional(readOnly = true)
     public List<Top5KeywordResponseDto> getFavoriteKeyword2() {
         return keywordRepository.findTop5Keywords();
