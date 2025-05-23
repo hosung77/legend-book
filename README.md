@@ -1,16 +1,18 @@
 <img src="https://capsule-render.vercel.app/api?type=waving&height=300&color=gradient&text=Legend%20Book&desc=도서%20대여%20및%20관리%20프로그램&fontAlign=50&fontAlignY=40&descAlignY=55">
 
 ## 📅 개발 기간
+
 2025.05.16 ~ 2025.05.26
 
 <br>
 
 ## 📚 팀원 및 역할 분담
-| 팀원 | 기능 |
-| --- | --- |
-| 진혜정 | 회원, 인증/ 인가 |
-| 김태정 | 도서(관리자) |
-| 이윤승 | 도서(사용자) |
+
+| 팀원  | 기능          |
+|-----|-------------|
+| 진혜정 | 회원, 인증/ 인가  |
+| 김태정 | 도서(관리자)     |
+| 이윤승 | 도서(사용자)     |
 | 이호성 | 인기 검색어, 좋아요 |
 
 <br><br>
@@ -68,10 +70,10 @@
 <!-- CI/CD -->
 <img src="https://img.shields.io/badge/CI/CD-0db7ed?style=for-the-badge"><img src="https://img.shields.io/badge/docker-257bd6?style=for-the-badge&logo=docker&logoColor=white"><img src="https://img.shields.io/badge/28.1.1-9CA3AF?style=for-the-badge">
 
-
 <br><br>
 
-## 📌 주요 기능 
+## 📌 주요 기능
+
 1. JWT, Spring Security를 이용한 회원 인증/인가 기능.
 2. 도서 관리자의 도서 생성, 조회, 수정, 삭제 기능.
 3. 이용자의 도서 검색, 도서 대여, 도서 좋아요 기능.
@@ -80,9 +82,8 @@
 <br><br>
 
 ## 와이어 프레임
+
 <img src="https://github.com/user-attachments/assets/93b555e6-5dce-40ff-9f58-efc3086ab595" width="800px" height="800px">
-
-
 
 ## 📌 API 명세서
 
@@ -107,15 +108,15 @@
 * Docs : 문서와 관련된 모든 것
 * Chore : 빌드 설정 변경 및 기타 환경설정
 
-
 ## 📌 Cache를 적용한 사례와 그 이유
+
 [김태정 - 📚등록된 모든 도서 조회 캐싱처리](/docs/taejeong.md) <br>
 
 [진혜정 - ❤️좋아요한 책 목록 조회 캐싱처리](/docs/hyejeong.md) <br>
 
-[이윤승 - 📚🔍도서 키워드 검색 캐싱처리](/docs/taejeong.md) <br>
+[이윤승 - 📚🔍도서 키워드 검색 캐싱처리](/docs/yoonseung.md) <br>
 
-[이호성 - 🔍인기 검색어 캐싱처리](/docs/hyejeong.md) <br>
+[이호성 - 🔍인기 검색어 캐싱처리](/docs/hosung.md) <br>
 
 ## 📌 트러블슈팅
 
@@ -123,7 +124,6 @@
 <summary> <a href="https://www.notion.so/teamsparta/AWS-EC2-1fb2dc3ef5148060b59bcb4e221a8922?pvs=4"> EC2 인바운드 규칙 미설정으로 인한 접속 불가 이슈 </a> </summary>
 <div markdown="1">
 <br>
-
 
 ```
 ## 문제 상황
@@ -150,7 +150,6 @@
 
 ```
 
-
 </div>
 </details>
 
@@ -158,7 +157,6 @@
 <summary> <a href="https://www.notion.so/teamsparta/docker-compose-yaml-1fb2dc3ef5148026aa64f61d1d1faa98?pvs=4"> docker-compose.yaml SECRET_KEY 이슈 </a> </summary>
 <div markdown="1">
 <br>
-
 
 ```
 ## 문제 상황
@@ -187,7 +185,6 @@
 <div markdown="1">
 <br>
 
-
 ```
 ## 문제 상황
 - Test 빌드 시, 기존 데이터베이스와 연결이 되지 않는 이슈 발생.
@@ -214,7 +211,6 @@
 <summary> <a href="https://www.notion.so/teamsparta/1fb2dc3ef51480598c7af663f0570611?pvs=4"> 포트 에러 </a> </summary>
 <div markdown="1">
 <br>
-
 
 ```
 ## 문제 상황
