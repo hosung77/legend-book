@@ -154,6 +154,92 @@
 </div>
 </details>
 
+<details>
+<summary> <a href="https://www.notion.so/teamsparta/docker-compose-yaml-1fb2dc3ef5148026aa64f61d1d1faa98?pvs=4"> docker-compose.yaml SECRET_KEY 이슈 </a> </summary>
+<div markdown="1">
+<br>
 
-## 📌 Cache를 적용한 사례와 그 이유
+
+```
+## 문제 상황
+
+- AWS EC2 서버에 Spring Boot 애플리케이션을 Docker 환경에서 배포하고 실행 시 SECRET_KEY를 가져오지 못해 실행 오류가 발생.
+
+
+## 원인 분석
+- .env 파일에서 SECRET_KEY를 읽도록 설정해두었음.
+- docker-compose.yaml 파일 environment 항목에 SECRET_KEY 가 지정되지 않았음.
+   →  애플리케이션이 SECRET_KEY 를 읽지 못하는 상황 발생.
+
+
+## 해결 방법
+- docker-compose.yaml 파일의 environment에 SECRET_KEY 지정.
+
+```
+
+</div>
+</details>
+
+</details>
+
+<details>
+<summary> <a href="https://www.notion.so/teamsparta/DB-test-DB-1fb2dc3ef514802c8b14d51b9912da46?pvs=4"> Test 빌드 에러 </a> </summary>
+<div markdown="1">
+<br>
+
+
+```
+## 문제 상황
+- Test 빌드 시, 기존 데이터베이스와 연결이 되지 않는 이슈 발생.
+
+
+## 원인 분석
+- 기존 application.yaml 설정은 update인데, 테스트 코드 데이터베이스는 create-drop 형식으로 만들어줘야할 것으로 추측.
+   → 테스트 코드는 테이블이 없는 상태이기 때문에.
+- application-test.yml을 추가로 생성해주기.
+
+
+## 해결 방법
+- application-test.yml을 추가로 생성 후 빌드.
+
+💡 Test 환경변수에 application.yaml 에서 사용하던 환경변수들을 입력해줘도 되는데 일일히 설정해줘야 하는 번거로움이 있음.
+💡 프로젝트가 크거나, 팀 개발 등인 경우 application-test.yml처럼 분리해놓는 것이 유지보수 및 안전성 측면에서 유리함.
+
+```
+
+</div>
+</details>
+
+<details>
+<summary> <a href="https://www.notion.so/teamsparta/1fb2dc3ef51480598c7af663f0570611?pvs=4"> 포트 에러 </a> </summary>
+<div markdown="1">
+<br>
+
+
+```
+## 문제 상황
+
+- 3306 포트가 이미 실행 중이라는 에러가 발생함.
+
+
+## 원인 분석
+- 각자의 개발 환경에서 MySQL이 설치되어 백그라운드에서 실행 중.
+- Docker는 동일한 포트를 사용하는 컨테이너를 동시에 실행하려 할 경우, 포트 충돌 오류가 발생.
+
+
+## 해결 방법
+- 팀원별로 각각 포트번호를 다르게 설정.
+
+```
+
+</div>
+</details>
+
+
+
+
+
+
+
+
 
