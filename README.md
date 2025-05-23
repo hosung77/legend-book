@@ -84,15 +84,16 @@
 
 
 
-## 📌 [API 명세서](https://www.notion.so/teamsparta/API-1fc2dc3ef51480369be2de083dbb66f8)
+## 📌 API 명세서
 
-
+[📚 API 명세서](https://www.notion.so/teamsparta/API-1fc2dc3ef51480369be2de083dbb66f8)
 
 <br><br>
 
-## 📌 [ERD](https://www.erdcloud.com/d/DGeK8xGTeu7rJ2Dd5)
+## 📌 ERD
 
-<img src="https://github.com/user-attachments/assets/32144ba5-9e63-470e-beab-bd3398210648" width="900px" height="400px">
+<img src="https://github.com/user-attachments/assets/bb6eb718-5567-4af3-9e51-17a7efabf881" width="800px" height="400px">
+
 
 <br><br>
 
@@ -105,3 +106,54 @@
 * Comment : 주석 수정 및 삭제
 * Docs : 문서와 관련된 모든 것
 * Chore : 빌드 설정 변경 및 기타 환경설정
+
+
+## 📌 Cache를 적용한 사례와 그 이유
+[김태정 - 📚등록된 모든 도서 조회 캐싱처리](/docs/taejeong.md) <br>
+
+[진혜정 - ❤️좋아요한 책 목록 조회 캐싱처리](/docs/hyejeong.md) <br>
+
+[이윤승 - 📚🔍도서 키워드 검색 캐싱처리](/docs/taejeong.md) <br>
+
+[이호성 - 🔍인기 검색어 캐싱처리](/docs/hyejeong.md) <br>
+
+## 📌 트러블슈팅
+
+<details>
+<summary> <a href="https://www.notion.so/teamsparta/AWS-EC2-1fb2dc3ef5148060b59bcb4e221a8922?pvs=4"> EC2 인바운드 규칙 미설정으로 인한 접속 불가 이슈 </a> </summary>
+<div markdown="1">
+<br>
+
+
+```
+## 문제 상황
+
+- AWS EC2 인스턴스를 실행한 후, 프론트엔드나 백엔드 서버에 접속하려 했으나 브라우저/클라이언트에서 연결되지 않음. 
+- 서버는 정상적으로 실행 중이었고, 로컬에서는 잘 작동함.
+
+
+## 원인 분석
+- EC2 인스턴스 보안 그룹 인바운드 규칙에 8080 포트를 허용하지 않았음.
+   → 외부에서 해당 포트로 접근 불가.
+
+
+## 해결 방법
+- EC2 인스턴스의 보안 그룹 - 인바운드 규칙에 다음 설정 추가
+  - 포트 범위 : 8080
+  - 프로토콜 : TCP
+  - 소스 : 0.0.0.0/0
+
+
+💡 개발 초기에는 `0.0.0.0/0`으로 설정하되, 배포 시에는 제한된 IP로 수정할 것
+
+💡 EC2 사용 시 보안 그룹 인바운드 설정은 필수이며, 사용하는 포트 번호를 정확히 열어줘야 외부에서 접근 가능함
+
+```
+
+
+</div>
+</details>
+
+
+## 📌 Cache를 적용한 사례와 그 이유
+
