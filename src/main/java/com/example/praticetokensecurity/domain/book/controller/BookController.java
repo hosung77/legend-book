@@ -1,4 +1,4 @@
-package com.example.praticetokensecurity.domain.book.controller;
+package com.example.praticetokensecurity.domain.book.Controller;
 
 import com.example.praticetokensecurity.common.code.SuccessStatus;
 import com.example.praticetokensecurity.common.response.ApiResponse;
@@ -7,6 +7,7 @@ import com.example.praticetokensecurity.domain.book.dto.responseDto.BookResponse
 import com.example.praticetokensecurity.domain.book.dto.responseDto.RentalResponseDto;
 import com.example.praticetokensecurity.domain.book.service.BookService;
 import com.example.praticetokensecurity.domain.user.entity.CustomUserPrincipal;
+import com.example.praticetokensecurity.global.dto.PageResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -50,6 +51,16 @@ public class BookController {
     ) {
         Page<BookResponseDto> response = bookService.searchByTitle(keyword, pageable);
         return ApiResponse.onSuccess(SuccessStatus.BOOK_READ_SUCCESS, response);
+    }
+
+    @GetMapping("/v3/books")
+    public ResponseEntity<ApiResponse<Page<BookResponseDto>>> searchByKeywordv3(
+        @RequestParam(required = false) String keyword,
+        @PageableDefault(page = 0, size = 20) Pageable pageable
+    ) {
+        PageResponse<BookResponseDto> response = bookService.searchByTitle2(keyword, pageable);
+        Page<BookResponseDto> page = response.toPage();
+        return ApiResponse.onSuccess(SuccessStatus.BOOK_READ_SUCCESS, page);
     }
 
     // 캐시 X

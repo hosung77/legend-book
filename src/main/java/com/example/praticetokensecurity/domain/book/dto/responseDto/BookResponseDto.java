@@ -3,12 +3,15 @@ package com.example.praticetokensecurity.domain.book.dto.responseDto;
 import com.example.praticetokensecurity.domain.book.entity.Book;
 import java.io.Serializable;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.domain.Page;
 
 @Getter
-@RequiredArgsConstructor
-public class BookResponseDto implements Serializable {
+@Setter
+@NoArgsConstructor
+public class BookResponseDto {
 
     private Long bookId;
     private String title;

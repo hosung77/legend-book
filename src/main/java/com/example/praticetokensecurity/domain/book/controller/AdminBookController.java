@@ -7,8 +7,10 @@ import com.example.praticetokensecurity.domain.book.dto.requestDto.AdminBookUpda
 import com.example.praticetokensecurity.domain.book.dto.responseDto.AdminBookResponseDto;
 import com.example.praticetokensecurity.domain.book.dto.responseDto.AdminPageResponse;
 import com.example.praticetokensecurity.domain.book.service.AdminBookService;
+import com.example.praticetokensecurity.global.dto.PageResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -81,13 +83,13 @@ public class AdminBookController {
      * @return ApiResponse에 page response 형태로 책 정보들을 담아 반환
      */
     @GetMapping("/v2/admin/books")
-    public ResponseEntity<ApiResponse<AdminPageResponse<AdminBookResponseDto>>> getAllBooksV2(
-        @RequestParam(defaultValue = "0") int page,
-        @RequestParam(defaultValue = "10") int size) {
-
-        AdminPageResponse<AdminBookResponseDto> responseDto = adminBookService.getAllBooksV2(page,
-            size);
-        return ApiResponse.onSuccess(SuccessStatus.GET_ALL_BOOKS_SUCCESS, responseDto);
+    public ResponseEntity<ApiResponse<Page<AdminBookResponseDto>>> getAllBooksV2(
+        @RequestParam(defaultValue = "1") int page,
+        @RequestParam(defaultValue = "10") int size
+    ) {
+        PageResponse<AdminBookResponseDto> response = adminBookService.getAllBooksV2(page, size);
+        Page<AdminBookResponseDto> pages = response.toPage();
+        return ApiResponse.onSuccess(SuccessStatus.GET_ALL_BOOKS_SUCCESS, pages);
     }
 
     /**

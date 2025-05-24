@@ -8,6 +8,7 @@ import com.example.praticetokensecurity.domain.book.dto.responseDto.AdminBookRes
 import com.example.praticetokensecurity.domain.book.dto.responseDto.AdminPageResponse;
 import com.example.praticetokensecurity.domain.book.entity.Book;
 import com.example.praticetokensecurity.domain.book.repository.BookRepository;
+import com.example.praticetokensecurity.global.dto.PageResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -50,13 +51,13 @@ public class AdminBookService {
     // 사이즈 10으로 고정이기 때문에 page1이라는 캐시 데이터만 생김
     // condition page가 1일 때만 캐싱 애초에 db 쿼리가 하나인 것은 캐싱 처리를 해도 의미가 없다 ex) join이 많은 복잡한 쿼리
     @Cacheable(value = "books", key = "'page1'", condition = "#page == 1")
-    public AdminPageResponse<AdminBookResponseDto> getAllBooksV2(int page, int size) {
+    public PageResponse<AdminBookResponseDto> getAllBooksV2(int page, int size) {
         Pageable pageable = PageRequest.of(page - 1, size, Sort.by("createdAt").descending());
-
         Page<Book> bookPage = bookRepository.findAllByIsDeletedFalse(pageable);
-
-        return new AdminPageResponse<>(bookPage, AdminBookResponseDto::new);
+        Page<AdminBookResponseDto> dtoPage = bookPage.map(AdminBookResponseDto::new);
+        return new PageResponse<>(dtoPage);
     }
+
 
     @Transactional
     public void deleteBook(Long id) {

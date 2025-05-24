@@ -24,8 +24,6 @@ spring:
       repositories:
         enabled: false
 
-  cache:
-    type: simple
 
 jwt:
   secret: ${SECRET_KEY}

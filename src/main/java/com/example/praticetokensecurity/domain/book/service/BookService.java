@@ -17,6 +17,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.example.praticetokensecurity.global.dto.PageResponse;
 
 @Service
 @RequiredArgsConstructor
@@ -41,6 +42,15 @@ public class BookService {
         Page<Book> searchedBooks = bookRepository.findByTitle(keyword, pageable);
         keywordRepository.save(Keyword.of(keyword));
         return BookResponseDto.fromEntityPage(searchedBooks);
+    }
+
+    // 캐시 o22222
+    @Cacheable(value = "bookSearchCache", key = "#keyword + '_' + #pageable.pageNumber + '_' + #pageable.pageSize")
+    public PageResponse<BookResponseDto> searchByTitle2(String keyword, Pageable pageable) {
+        Page<Book> searchedBooks = bookRepository.findByTitle(keyword, pageable);
+        keywordRepository.save(Keyword.of(keyword));
+        Page<BookResponseDto> bookResponseDtoPage = BookResponseDto.fromEntityPage(searchedBooks);
+        return new PageResponse<>(bookResponseDtoPage);
     }
 
     // 캐시 x

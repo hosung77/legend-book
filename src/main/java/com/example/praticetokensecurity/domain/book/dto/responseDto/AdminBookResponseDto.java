@@ -3,17 +3,19 @@ package com.example.praticetokensecurity.domain.book.dto.responseDto;
 import com.example.praticetokensecurity.domain.book.entity.Book;
 import com.example.praticetokensecurity.domain.book.enums.BookStatus;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
-@RequiredArgsConstructor
+@NoArgsConstructor
+@Setter
 public class AdminBookResponseDto {
 
-    private final Long id;
-    private final String title;
-    private final String authorName;
-    private final String publisher;
-    private final BookStatus bookStatus;
+    private Long id;
+    private String title;
+    private String authorName;
+    private String publisher;
+    private BookStatus bookStatus;
 
     public AdminBookResponseDto(Book book) {
         this.id = book.getId();
