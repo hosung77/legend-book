@@ -2,17 +2,22 @@ package com.example.praticetokensecurity.domain.like.dto.response;
 
 import com.example.praticetokensecurity.domain.book.entity.Book;
 import com.example.praticetokensecurity.domain.like.entity.Like;
+import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @AllArgsConstructor
-public class LikedResponseDto {
+@NoArgsConstructor
+@Setter
+public class LikedResponseDto implements Serializable{
 
-    private final Long bookId;
-    private final String title;
-    private final String authorName;
-    private final String publisher;
+    private Long bookId;
+    private String title;
+    private String authorName;
+    private String publisher;
 
     public static LikedResponseDto from(Like like) {
         Book book = like.getBook();
