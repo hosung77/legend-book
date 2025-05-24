@@ -24,6 +24,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.example.praticetokensecurity.global.dto.PageResponse;
 
 @Service
 @RequiredArgsConstructor
@@ -111,8 +112,9 @@ public class UserService {
     }
 
     @Cacheable(value = "likes", key = "#userId + '_' + #pageable.pageNumber")
-    public Page<LikedResponseDto> getMyLikedBookV2(Long userId, Pageable pageable) {
+    public PageResponse<LikedResponseDto> getMyLikedBookV2(Long userId, Pageable pageable) {
         Page<Like> likes = likeRepository.findByUserId(userId, pageable);
-        return likes.map(LikedResponseDto::from);
+        Page<LikedResponseDto> likedDtoPage = likes.map(LikedResponseDto::from);
+        return new PageResponse<>(likedDtoPage);
     }
 }

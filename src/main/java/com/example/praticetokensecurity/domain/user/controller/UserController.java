@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.example.praticetokensecurity.global.dto.PageResponse;
 
 @RestController
 @RequiredArgsConstructor
@@ -82,13 +83,14 @@ public class UserController {
     }
 
     @GetMapping("/v2/users/likes")
-    public ResponseEntity<ApiResponse<Page<LikedResponseDto>>> getMyLikedBookV2(
+    public ResponseEntity<ApiResponse<PageResponse<LikedResponseDto>>> getMyLikedBookV2(
         @AuthenticationPrincipal CustomUserPrincipal authUser,
         @PageableDefault(page = 0, size = 10) Pageable pageable
     ) {
-        Page<LikedResponseDto> myLikedBook = userService.getMyLikedBookV2(
+        PageResponse<LikedResponseDto> myLikedBook = userService.getMyLikedBookV2(
             authUser.getUser().getId(),
-            pageable);
+            pageable
+        );
 
         return ApiResponse.onSuccess(SuccessStatus.USER_LIKED_LIST_SUCCESS, myLikedBook);
     }
