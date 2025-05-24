@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.example.praticetokensecurity.global.dto.PageResponse;
 
 @RestController
 @RequiredArgsConstructor
@@ -50,6 +51,16 @@ public class BookController {
     ) {
         Page<BookResponseDto> response = bookService.searchByTitle(keyword, pageable);
         return ApiResponse.onSuccess(SuccessStatus.BOOK_READ_SUCCESS, response);
+    }
+
+    @GetMapping("/v3/books")
+    public ResponseEntity<ApiResponse<Page<BookResponseDto>>> searchByKeywordv3(
+        @RequestParam(required = false) String keyword,
+        @PageableDefault(page = 0, size = 20) Pageable pageable
+    ) {
+        PageResponse<BookResponseDto> response = bookService.searchByTitle2(keyword, pageable);
+        Page<BookResponseDto> page = response.toPage();
+        return ApiResponse.onSuccess(SuccessStatus.BOOK_READ_SUCCESS, page);
     }
 
     // 캐시 X
