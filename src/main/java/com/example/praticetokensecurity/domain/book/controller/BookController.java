@@ -1,4 +1,4 @@
-package com.example.praticetokensecurity.domain.book.controller;
+package com.example.praticetokensecurity.domain.book.Controller;
 
 import com.example.praticetokensecurity.common.code.SuccessStatus;
 import com.example.praticetokensecurity.common.response.ApiResponse;
@@ -7,6 +7,7 @@ import com.example.praticetokensecurity.domain.book.dto.responseDto.BookResponse
 import com.example.praticetokensecurity.domain.book.dto.responseDto.RentalResponseDto;
 import com.example.praticetokensecurity.domain.book.service.BookService;
 import com.example.praticetokensecurity.domain.user.entity.CustomUserPrincipal;
+import com.example.praticetokensecurity.global.dto.PageResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.example.praticetokensecurity.global.dto.PageResponse;
 
 @RestController
 @RequiredArgsConstructor
