@@ -110,7 +110,7 @@
 
 ## 📌 Cache를 적용한 사례와 그 이유
 
-[김태정 - 📚등록된 모든 도서 조회 캐싱처리](/docs/taejeong.md) <br>
+[김태정 - 📚등록된 모든 도서 조회 1페이지 캐싱처리](/docs/taejeong.md) <br>
 
 [진혜정 - ❤️좋아요한 책 목록 조회 캐싱처리](/docs/hyejeong.md) <br>
 
