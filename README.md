@@ -173,6 +173,10 @@
 ## 해결 방법
 - docker-compose.yaml 파일의 environment에 SECRET_KEY 지정.
 
+1.git secret에 key value로 환경변수 값 설정.
+2.git action을 통해서 배포될 때 해당 secret키로 붙여버리는 방식.
+3.서버가 올라간 다음에 수동으로 서버에 환경 변수로 설정하는 방법.
+
 ```
 
 </div>
@@ -191,13 +195,11 @@
 
 
 ## 원인 분석
-- 기존 application.yaml 설정은 update인데, 테스트 코드 데이터베이스는 create-drop 형식으로 만들어줘야할 것으로 추측.
-   → 테스트 코드는 테이블이 없는 상태이기 때문에.
-- application-test.yml을 추가로 생성해주기.
+- 기존 application.yaml에서 로컬 DB를 바라보도록 설정하였으나, Docker 도입 이후 테스트 환경에서 기존 DB에 접근하지 못해 문제 발생.
 
 
 ## 해결 방법
-- application-test.yml을 추가로 생성 후 빌드.
+- application-test.yml 파일을 작성하여, 테스트 전용 DB 설정을 분리하여 적용.
 
 💡 Test 환경변수에 application.yaml 에서 사용하던 환경변수들을 입력해줘도 되는데 일일히 설정해줘야 하는 번거로움이 있음.
 💡 프로젝트가 크거나, 팀 개발 등인 경우 application-test.yml처럼 분리해놓는 것이 유지보수 및 안전성 측면에서 유리함.
@@ -225,7 +227,7 @@
 
 
 ## 해결 방법
-- 팀원별로 각각 포트번호를 다르게 설정.
+- 포트번호를 3306 외의 번호로 다르게 설정.
 
 ```
 
